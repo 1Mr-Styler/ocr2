@@ -5,16 +5,22 @@ import java.text.SimpleDateFormat
 class ParserService {
 
     HashMap<String, String> runNER(String text, String path) {
-        //Run NER.sh
+        println("Run NER.sh")
         File pred = new File("${path}pred.txt")
         pred.text = text
 
         String dirLoc = "/model"
 
-//        println("cd $dirLoc && ls -la".execute().text)
-        def ner = "$dirLoc/ner.sh ${path}pred.txt".execute()
+        def ner = "/bin/bash -c $dirLoc/ner.sh ${path}pred.txt".execute()
+        println("Before wait")
+        ner.waitFor()
+        println("After wait")
         String nerResult = ner.text
         println(nerResult)
+
+        def outputStream = new StringBuffer();
+        ner.waitForProcessOutput(outputStream, System.err);
+        println(outputStream.toString());
 
         nerResult += "\n"
 
@@ -31,6 +37,19 @@ class ParserService {
         def reg = "python ${path}ner.py".execute()
         String result = reg.text
 
+        //~~~~~~~~~~~~~~ Extract NRIC ~~~~~~~~~~~~~
+        String nricTemplate = new File("${path}/nric.py").getText('UTF-8')
+
+        String nt = nricTemplate.replace("--text--", nerResult)
+        File nricpy = new File("/tmp/nric.py")
+        nricpy.text = nt
+
+        def nircExtract = "/bin/bash -c /usr/bin/python /tmp/nric.py".execute()
+        String nric = nircExtract.text
+        println("NRIC: ${nric}")
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         println(result)
         ArrayList<Double> amounts = [0d, 100000d]
         boolean hasAmount = false
@@ -38,7 +57,7 @@ class ParserService {
         ArrayList<Date> dates = new ArrayList<>()
 
         List<String> stuff = result.split(",,,")
-        HashMap<String, HashSet<String>> fields = new HashMap<>()
+        HashMap<String, HashSet<Object>> fields = new HashMap<>()
         stuff.eachWithIndex { it, i ->
             if ((i + 1) != stuff.size()) {
                 List<String> field = it.split("----")
@@ -106,8 +125,9 @@ class ParserService {
 
             amounts[0] = _amounts.reverse()[0]
             amounts[1] = _amounts.reverse()[1]
-            fields.put("coverage", new HashSet<>([amounts[0]]))
-            fields.put("premium", new HashSet<>([amounts[1]]))
+            fields.put("total-gross", new HashSet<>([amounts[0]]))
+            fields.put("total-net", new HashSet<>([amounts[1]]))
+            fields.put("total-discount", new HashSet<>([amounts[0] - amounts[1]]))
 
             fields.remove("amount")
             fields.put("amount", new HashSet<>(_amounts))
@@ -116,8 +136,12 @@ class ParserService {
         //Date
         Collections.sort(dates);
         if (dates.size() > 1) {
-            fields.put("start-date", new HashSet<>([dates[0].format("dd/MM/yyyy")]))
-            fields.put("expiry-date", new HashSet<>([dates[-1].format("dd/MM/yyyy")]))
+            fields.put("admission-date", new HashSet<>([dates[0].format("dd/MM/yyyy")]))
+            fields.put("discharge-date", new HashSet<>([dates[-1].format("dd/MM/yyyy")]))
+        }
+
+        if (nric.size() > 0) {
+            fields.put("nric", new HashSet<>([nric]))
         }
 
         fields["date"] = null
@@ -135,8 +159,11 @@ class ParserService {
             } else locations.add(it)
 
         }
-        fields["location"] = null
-        fields["location"] = locations
+        fields.remove("location")
+        if (locations.size() > 0) {
+            fields.put "location", locations
+
+        }
 
         Set issuer = new HashSet<>()
         fields["organization"].each {
@@ -146,8 +173,11 @@ class ParserService {
         }
 
         fields.remove("organization")
-        fields["issuer"] = null
-        fields["issuer"] = issuer
+        fields.remove("issuer")
+        if (issuer.size() > 0) {
+            fields.put "organization", issuer
+        }
+
         fields["person"].each {
             if (!it.contains("\n")) {
                 if (fields["name"] == null) {

@@ -1,0 +1,6 @@
+*.txt
+.DS_Store
+*.jpg
+build/
+.gradle/
+.idea/

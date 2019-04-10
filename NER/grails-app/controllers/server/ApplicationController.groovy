@@ -12,12 +12,15 @@ class ApplicationController implements PluginManagerAware {
     ParserService parserService
 
     def index() {
+        println("Path's")
         String path = "/model/"
 
         String fl = request.JSON.doc ?: params.doc
+        println("FileLocation: $fl")
 
         //Load Doc
         String pred = new File(fl).getText('UTF-8')
+        println("Pred: ${pred.take(20)}")
 
         render parserService.runNER(pred, path) as JSON
         return
