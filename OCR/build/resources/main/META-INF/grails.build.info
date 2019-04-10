@@ -1,0 +1,6 @@
+#Wed, 10 Apr 2019 01:27:32 +0000
+
+info.app.version=0.1
+info.app.name=INSUR
+grails.env=production
+info.app.grailsVersion=3.3.5

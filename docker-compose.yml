@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+ ner2:
+  image: "ner2:latest"
+  restart: always
+  volumes:
+   - ./NER:/apps/ner
+   - ./model:/model
+  ports:
+   - 5056:5005
+  entrypoint: /apps/ner/docker-entry.sh 
+
+ ocr2:
+  image: "ocr2:latest"
+  restart: always
+  volumes:
+   - ./OCR:/apps/ocr
+   - ./model:/model
+  ports:
+   - 8090:8090
+   - 5055:5005
+  entrypoint: /apps/ocr/docker-entry.sh

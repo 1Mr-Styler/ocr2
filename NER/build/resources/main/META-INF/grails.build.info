@@ -1,0 +1,6 @@
+#Wed, 10 Apr 2019 01:29:35 +0000
+
+info.app.version=0.1
+info.app.name=Server
+grails.env=production
+info.app.grailsVersion=3.3.5
