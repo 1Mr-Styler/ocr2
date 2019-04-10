@@ -23,7 +23,41 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2e57bef-e1b9-4abe-98e2-e7038301a2a6" name="Default Changelist" comment="" />
+    <list default="true" id="c2e57bef-e1b9-4abe-98e2-e7038301a2a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OCR/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ApplicationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ApplicationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1$_closure6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1$_closure6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1$_closure7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1$_closure7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1$_closure8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1$_closure8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService$_runNER_closure5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/server/ParserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/server/ParserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/stacktrace.log" beforeDir="false" afterPath="$PROJECT_DIR$/build/stacktrace.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/controllers/server/ApplicationController.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/controllers/server/ApplicationController.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/services/server/ParserService.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/services/server/ParserService.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/.gradle/3.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/.gradle/3.5/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/.gradle/3.5/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/build/classes/main/insur/ApplicationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/build/classes/main/insur/ApplicationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/build/classes/main/insur/ConvertController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/build/classes/main/insur/ConvertController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/build/classes/main/insur/DocumentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/build/classes/main/insur/DocumentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OCR/build/stacktrace.log" beforeDir="false" afterPath="$PROJECT_DIR$/../OCR/build/stacktrace.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../model/location.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../model/location.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../model/ner.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../model/ner.sh" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -47,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="53" column="57" lean-forward="true" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
+            <state relative-caret-position="795">
+              <caret line="53" column="57" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -56,7 +90,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/application.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
+            <state relative-caret-position="1185">
               <caret line="79" column="20" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="20" />
             </state>
           </provider>
@@ -65,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/server/ApplicationController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="135">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -74,8 +108,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/services/server/ParserService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+            <state relative-caret-position="162">
+              <caret line="178" column="9" lean-forward="true" selection-start-line="178" selection-start-column="9" selection-end-line="178" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -90,6 +124,9 @@
       <find>grailsApplication.config.fileLocation.toString()</find>
       <find>$PROJECT_DIR$/../../NER/stanford-ner-2018-10-16</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -106,11 +143,13 @@
     <option name="width" value="1440" />
     <option name="height" value="793" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -133,11 +172,11 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Grails" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
@@ -241,18 +280,20 @@
       <updated>1554795746183</updated>
       <workItem from="1554795750632" duration="2630000" />
       <workItem from="1554820033167" duration="1235000" />
-      <workItem from="1554859970439" duration="2236000" />
+      <workItem from="1554859970439" duration="10232000" />
+      <workItem from="1554888495993" duration="4624000" />
+      <workItem from="1554900719941" duration="1184000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6101000" />
+    <option name="totallyTimeSpent" value="19905000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="939" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="940" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21916972" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22405373" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -263,14 +304,14 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3305785" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3301887" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32952926" />
       <window_info anchor="bottom" id="YouTrack" order="8" />
       <window_info anchor="bottom" id="Spring" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3293979" />
       <window_info anchor="bottom" id="Docker" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
@@ -533,40 +574,78 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/grails-app/services/server/ParserService.groovy</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/grails-app/services/server/ParserService.groovy</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/grails-app/services/server/ParserService.groovy</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/grails-app/services/server/ParserService.groovy</url>
+          <line>37</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/features-true.txt" />
     <entry file="file://$PROJECT_DIR$/deploy.sh" />
     <entry file="file://$PROJECT_DIR$/gradle.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/r.txt" />
+    <entry file="file://$PROJECT_DIR$/docker-entry.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="53" column="57" lean-forward="true" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
+        <state relative-caret-position="795">
+          <caret line="53" column="57" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
+        <state relative-caret-position="1185">
           <caret line="79" column="20" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/server/ApplicationController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="135">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/server/ParserService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+        <state relative-caret-position="162">
+          <caret line="178" column="9" lean-forward="true" selection-start-line="178" selection-start-column="9" selection-end-line="178" selection-end-column="9" />
         </state>
       </provider>
     </entry>
