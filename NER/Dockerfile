@@ -12,6 +12,7 @@ RUN ["mkdir", "-p", "/model"]
 COPY . /apps/ner
 RUN apt-get update && apt-get install -y zip curl python2.7
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN ln -s /usr/bin/python2.7 /usr/bin/python
 RUN curl -s "https://get.sdkman.io" | bash
 RUN chmod a+x "$SDKMAN_DIR/bin/sdkman-init.sh"
 
