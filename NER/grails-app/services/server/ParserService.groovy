@@ -13,7 +13,7 @@ class ParserService {
 
         def ner = "/bin/bash -c $dirLoc/ner.sh ${path}pred.txt".execute()
         println("Before wait")
-        ner.waitFor()
+        ner.waitForProcessOutput()
         println("After wait")
         String nerResult = ner.text
         println(nerResult)
