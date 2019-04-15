@@ -12,21 +12,26 @@ class ParserService {
         String dirLoc = "/model"
 
         def ner = "/bin/bash -c $dirLoc/ner.sh ${path}pred.txt".execute()
-        println("Before wait")
-        ner.waitForProcessOutput()
-        println("After wait")
+        println("Before NER wait")
+        ner.waitFor()
+        println("After NER wait")
         String nerResult = ner.text
-        println(nerResult)
+        println("ner Size: ${nerResult.size()}")
 
-        def outputStream = new StringBuffer();
+        /*def outputStream = new StringBuffer();
         ner.waitForProcessOutput(outputStream, System.err);
-        println(outputStream.toString());
+        println(outputStream.toString());*/
 
         nerResult += "\n"
 
-        def location = "$dirLoc/location.sh ${path}pred.txt".execute()
+        println("Before Location wait")
+        def location = "$dirLoc/location.sh".execute()
+        location.waitFor()
+        println("After Location wait")
         nerResult += location.text
-        println(nerResult)
+        println("+Loc Size: ${nerResult.size()}")
+
+//        println(nerResult)
 
         String template = new File("${path}/ner_template.py").getText('UTF-8')
 
@@ -44,7 +49,8 @@ class ParserService {
         File nricpy = new File("/tmp/nric.py")
         nricpy.text = nt
 
-        def nircExtract = "/bin/bash -c /usr/bin/python /tmp/nric.py".execute()
+        def nircExtract = "/usr/bin/python /tmp/nric.py".execute()
+        nircExtract.waitFor()
         String nric = nircExtract.text
         println("NRIC: ${nric}")
 
