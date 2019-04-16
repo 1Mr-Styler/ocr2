@@ -39,8 +39,11 @@ class DocumentController {
         String path = grailsApplication.config.fileLocation.toString()
         ArrayList<String> files = new ArrayList<String>()
 
-        String fileName = "${path}_${System.currentTimeMillis().toString()}.jpg"
-        String fileName2 = "${path}_${System.currentTimeMillis().toString()}.txt"
+        String fileNameTemplate = "${System.currentTimeMillis().toString()}"
+        String fileName = "${path}_${fileNameTemplate}.jpg"
+        String fileName2 = "${path}_${fileNameTemplate}.txt"
+        String fileName3 = "${path}_${fileNameTemplate}.txt.bounds"
+//        String fileName2 = "${path}_1555369770802.txt"
 
         documentService.b64ToFile(document, fileName)
 
@@ -60,6 +63,7 @@ class DocumentController {
 
 
         ArrayList<String> texts = new ArrayList<String>()
+        ArrayList<String> boundedTexts = new ArrayList<String>()
         ArrayList<String> errors = new ArrayList<String>()
 
 
@@ -67,22 +71,34 @@ class DocumentController {
             println("Files: ${files.size()}")
             files.eachWithIndex { file, i ->
                 String pred = documentService.predict(file, path)
+                String sm2 = documentService.predict(file, path, "2")
+//                String pred = new File("${path}/_1555369770802.txt").getText('UTF-8')
                 texts.add(pred)
+                boundedTexts.add(sm2)
             }
 
+            //~~~~~~~~~~~~~~~ Preprocess plain text ~~~~~~~~~~~~
             File textPred = new File(fileName2)
             String allText = ""
             texts.each { txt ->
                 allText += txt
             }
             textPred.text = allText
+            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+            //~~~~~~~~~~~~~~~ Preprocess bounded text ~~~~~~~~~~~~
+            boundedTexts.eachWithIndex { txt, i ->
+                File boundsPred = new File(fileName3 + i.toString())
+                boundsPred.text = txt
+            }
+            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
             RestBuilder rest = new RestBuilder()
 
             RestResponse resp = rest.post("http://ner2:8080") {
                 accept('application/json')
                 contentType('text/plain')
-                json('{ "doc": \'' + fileName2 + '\'}')
+                json('{ "doc": \'' + fileName2 + '\', "files": ' + files.size() + '}')
             }
 
             render new HashMap<String, Object>(data: resp.json, text: texts) as JSON

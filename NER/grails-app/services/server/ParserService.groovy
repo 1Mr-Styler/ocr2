@@ -1,12 +1,26 @@
 package server
 
+import grails.converters.JSON
+import org.grails.web.json.JSONObject
+
 import java.text.SimpleDateFormat
+import java.util.regex.Matcher
 
 class ParserService {
 
-    HashMap<String, String> runNER(String text, String path) {
+    HashMap<String, String> runNER(String text, String path, ArrayList<String> bounds, int numOfDocs) {
         println("Run NER.sh")
+        HashMap<String, HashSet<Object>> fields = new HashMap<>()
+
+        ArrayList<JSONObject> json = new ArrayList<>()
+        bounds.each {
+            json.add(JSON.parse(it))
+        }
         File pred = new File("${path}pred.txt")
+        ArrayList<String> tabTexts = new ArrayList<>()
+        json.each {
+            tabTexts.add(it.ParsedResults[0].ParsedText)
+        }
         pred.text = text
 
         String dirLoc = "/model"
@@ -56,6 +70,31 @@ class ParserService {
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+        //~~~~~~~~~~~~~~ Extract Info ~~~~~~~~~~~~~
+        tabTexts.each {tabText ->
+            String batchTemplate = new File("${path}/batch_process.py").getText('UTF-8')
+
+            String batchPyfileString = batchTemplate.replace("--text--", tabText)
+
+            File batchPyfile = new File("/tmp/bpc.py")
+            batchPyfile.text = batchPyfileString
+
+            def batchExtract = "/usr/bin/python /tmp/bpc.py".execute()
+            batchExtract.waitFor()
+            String batch = batchExtract.text
+            batch.split("\n").each { desc ->
+                def data = desc.split("---")
+
+                if (data[1].contains(".")) {
+                    println("${data[0].trim()} = ${data[1]}")
+                    if (fields["items"] == null) {
+                        fields.put("items", new HashSet<>([data[0].trim(), data[1]]))
+                    } else fields["items"].add([data[0].trim(), data[1]])
+                }
+            }
+        }
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         println(result)
         ArrayList<Double> amounts = [0d, 100000d]
         boolean hasAmount = false
@@ -63,7 +102,6 @@ class ParserService {
         ArrayList<Date> dates = new ArrayList<>()
 
         List<String> stuff = result.split(",,,")
-        HashMap<String, HashSet<Object>> fields = new HashMap<>()
         stuff.eachWithIndex { it, i ->
             if ((i + 1) != stuff.size()) {
                 List<String> field = it.split("----")

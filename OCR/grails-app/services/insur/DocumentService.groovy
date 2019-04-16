@@ -51,11 +51,11 @@ class DocumentService {
         }
     }
 
-    String predict(String file, String path) {
+    String predict(String file, String path, String sm2 = "") {
         StringBuilder pred = new StringBuilder()
 
         try {
-            def proc = "python ${path}ocr.pyc ${file} checkpoint/model.ckpt-92900.data-00000-of-00001".execute()
+            def proc = "python ${path}ocr${sm2}.pyc ${file} checkpoint/model.ckpt-92900.data-00000-of-00001".execute()
             def ypred = proc.in.getText('UTF-8').split("\n")
 
             for (String line : ypred) {
