@@ -53,7 +53,7 @@ class ParserService {
         File nerpy = new File("${path}ner.py")
         nerpy.text = g
 
-        def reg = "python ${path}ner.py".execute()
+        def reg = "python2.7 ${path}ner.py".execute()
         String result = reg.text
 
         //~~~~~~~~~~~~~~ Extract NRIC ~~~~~~~~~~~~~
@@ -63,7 +63,7 @@ class ParserService {
         File nricpy = new File("/tmp/nric.py")
         nricpy.text = nt
 
-        def nircExtract = "/usr/bin/python /tmp/nric.py".execute()
+        def nircExtract = "/usr/bin/python2.7 /tmp/nric.py".execute()
         nircExtract.waitFor()
         String nric = nircExtract.text
         println("NRIC: ${nric}")
@@ -79,7 +79,7 @@ class ParserService {
             File batchPyfile = new File("/tmp/bpc.py")
             batchPyfile.text = batchPyfileString
 
-            def batchExtract = "/usr/bin/python /tmp/bpc.py".execute()
+            def batchExtract = "/usr/bin/python2.7 /tmp/bpc.py".execute()
             batchExtract.waitFor()
             String batch = batchExtract.text
             batch.split("\n").each { desc ->
@@ -92,6 +92,22 @@ class ParserService {
                     } else fields["items"].add([data[0].trim(), data[1]])
                 }
             }
+        }
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        //~~~~~~~~~~~~~~ Parse Names ~~~~~~~~~~~~~
+        tabTexts.each {tabText ->
+            String exTemplate = new File("${path}/ex.py").getText('UTF-8')
+
+            String exPyfileString = exTemplate.replace("--text--", tabText)
+
+            File exPyfile = new File("/tmp/ex.py")
+            exPyfile .text = exPyfileString
+
+            def exExtract = "/usr/bin/python2.7 /tmp/ex.py".execute()
+            exExtract.waitFor()
+            String names = exExtract.text
+            fields.put("patient-names", new HashSet<>([names]))
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
