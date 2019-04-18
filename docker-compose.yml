@@ -27,5 +27,4 @@ services:
    - ./model:/model
   ports:
    - 8091:8080
-   - 5057:5005
   entrypoint: /apps/wui/docker-entry.sh

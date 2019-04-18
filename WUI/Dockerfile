@@ -30,7 +30,6 @@ RUN source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java $JAVA_VERSION
 WORKDIR /apps/wui
 
 EXPOSE 8080
-EXPOSE 5005
 ENTRYPOINT ["./docker-entry.sh"]
 
 
