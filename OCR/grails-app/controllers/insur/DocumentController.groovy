@@ -12,7 +12,7 @@ class DocumentController {
     def save() {
         print("[${new Date().toString()}]  -->  ")
 
-        def dataMap = params
+        def dataMap = request.JSON
         dataMap.each {
             println(it)
         }
@@ -28,9 +28,9 @@ class DocumentController {
         def document
 
         base64 = new ArrayList<>()
-        document = request.getFile('doc1')
-        def document2 = request.getFile('doc2')
-        def document3 = request.getFile('doc3')
+        document = new File("/model/images/" + request.JSON.getAt('doc1'))
+        def document2 = null
+        def document3 = null
         base64.add("")
 
         int numOfImg = 1
@@ -49,13 +49,15 @@ class DocumentController {
 
         files.add(fileName)
 
-        if (document2 != null) {
+        if (request.JSON.getAt('doc2') != null) {
+            document2 = new File("/model/images/" + request.JSON.getAt('doc2'))
             fileName = "${path}_doc2_${System.currentTimeMillis().toString()}.jpg"
             documentService.b64ToFile(document2, fileName)
             files.add(fileName)
         }
 
-        if (document3 != null) {
+        if (request.JSON.getAt('doc3') != null) {
+            document3 = new File("/model/images/" + request.JSON.getAt('doc3'))
             fileName = "${path}_doc3_${System.currentTimeMillis().toString()}.jpg"
             documentService.b64ToFile(document3, fileName)
             files.add(fileName)

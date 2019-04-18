@@ -37,11 +37,14 @@ class DocumentService {
         }
     }
 
-    def b64ToFile(def image, String file) {
+    def b64ToFile(File image, String file) {
 
         // write the image to a file
         try {
-            image.transferTo(new File(file))
+//            image.transferTo(new File(file))
+
+            new File(file).bytes = image.bytes
+
 
             return [error: null, status: true]
         } catch (Exception e) {
