@@ -1,4 +1,4 @@
-FROM vanilla:latest
+FROM ubuntu:16.04
 
 LABEL version="1.0"
 LABEL description="Nubeslab OCR/NER 2 GUI"
