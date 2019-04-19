@@ -85,7 +85,7 @@ class ParserService {
             batch.split("\n").each { desc ->
                 def data = desc.split("---")
 
-                if (data[1].contains(".")) {
+                if (data[1].contains(".") && data[0].size() > 2) {
                     println("${data[0].trim()} = ${data[1]}")
                     if (fields["items"] == null) {
                         fields.put("items", new HashSet<>([data[0].trim(), data[1]]))
@@ -201,7 +201,7 @@ class ParserService {
         }
 
         if (nric.size() > 0) {
-            fields.put("nric", new HashSet<>([nric]))
+            fields.put("nric", new HashSet<>([nric.split("\n")[0]]))
         }
 
         fields["date"] = null

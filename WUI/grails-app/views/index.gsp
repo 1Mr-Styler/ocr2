@@ -33,12 +33,12 @@
                     <div class="card box-shadow">
                         <ul class="list-group">
                             <li class="list-group-item">Patient Name: ${flash.items.data."patient-names"[0]}</li>
-                            <li class="list-group-item">Patient NRIC: ${flash.items.data.nric[0].toString().split(' ')[0]}</li>
-                            <li class="list-group-item">Admission Date: ${flash.items.data."admission-date"[0]}</li>
-                            <li class="list-group-item">Discharge Date: ${flash.items.data."discharge-date"[0]}</li>
-                            <li class="list-group-item">Total Gross: MYR${flash.items.data."total-gross"[0]}</li>
-                            <li class="list-group-item">Total Discount: MYR${flash.items.data."total-discount"[0]}</li>
-                            <li class="list-group-item">Total Payable: MYR${flash.items.data."total-net"[0]}</li>
+                            <li class="list-group-item">Patient NRIC: ${flash.items.data.nric?.getAt(0)}</li>
+                            <li class="list-group-item">Admission Date: ${flash.items.data."admission-date"?.getAt(0)}</li>
+                            <li class="list-group-item">Discharge Date: ${flash.items.data."discharge-date"?.getAt(0)}</li>
+                            <li class="list-group-item">Total Gross: MYR${flash.items.data."total-gross"?.getAt(0)}</li>
+                            <li class="list-group-item">Total Discount: MYR${flash.items.data."total-discount"?.getAt(0)}</li>
+                            <li class="list-group-item">Total Payable: MYR${flash.items.data."total-net"?.getAt(0)}</li>
                         </ul>
 
                         <div class="list-group">
