@@ -6,3 +6,4 @@ build/
 .gradle/
 .idea/
 model/ner.py
+!requirements.txt

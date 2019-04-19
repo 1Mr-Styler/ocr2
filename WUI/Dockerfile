@@ -5,8 +5,7 @@ LABEL description="Nubeslab OCR/NER 2 GUI"
 
 ENV SDKMAN_DIR /root/.sdkman
 ENV GRAILS_VERSION 3.3.6
-#ENV JAVA_VERSION 8.0.201-oracle
-ENV JAVA_VERSION 8.0.202-zulu
+ENV JAVA_VERSION 8.0.212-zulu
 
 RUN ["mkdir", "-p", "/apps/wui"] 
 RUN ["mkdir", "-p", "/model"] 
@@ -31,6 +30,7 @@ RUN source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java $JAVA_VERSION
 WORKDIR /apps/wui
 
 EXPOSE 8080
+EXPOSE 5005
 ENTRYPOINT ["./docker-entry.sh"]
 
 
