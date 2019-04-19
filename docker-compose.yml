@@ -2,24 +2,21 @@ version: '3'
 
 services:
  ner2:
-  image: "ner2:latest"
+  build: "./NER"
   restart: always
   volumes:
    - ./NER:/apps/ner
    - ./model:/model
-  ports:
-   - 5056:5005
   entrypoint: /apps/ner/docker-entry.sh 
 
  ocr2:
-  image: "ocr2:latest"
+  build: "./OCR"
   restart: always
   volumes:
    - ./OCR:/apps/ocr
    - ./model:/model
   ports:
    - 8090:8090
-   - 5055:5005
   entrypoint: /apps/ocr/docker-entry.sh
 
  wui:
@@ -30,5 +27,4 @@ services:
    - ./model:/model
   ports:
    - 8091:8080
-   - 5057:5005
   entrypoint: /apps/wui/docker-entry.sh

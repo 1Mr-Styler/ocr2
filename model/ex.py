@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''.*([Nn]ame[\s\t:;]+?([A-Z]{2,}\s[A-Z]{2,}\s?[A-Z]{2,}?))[\r\n\t]''')
+regex = (r'''.*([Nn]ame[\s\t:;]+?([A-Z]{2,}\s[A-Z]{2,}\s?[A-Z]{2,}?))[\s\r\n\t]''')
 
 test_str = ('''--text--''')
 

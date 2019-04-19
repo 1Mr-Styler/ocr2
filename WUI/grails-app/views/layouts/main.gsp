@@ -43,7 +43,7 @@
         <p class="float-right">
             <a href="#">Back to top</a>
         </p>
-        <p>Xtract template is based on Bootstrap ©</p>
+        <p>Xtract UI is based on Bootstrap ©</p>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

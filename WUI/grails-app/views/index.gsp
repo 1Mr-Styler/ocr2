@@ -33,12 +33,12 @@
                     <div class="card box-shadow">
                         <ul class="list-group">
                             <li class="list-group-item">Patient Name: ${flash.items.data."patient-names"[0]}</li>
-                            <li class="list-group-item">Patient NRIC: ${flash.items.data.nric[0].toString().split(' ')[0]}</li>
-                            <li class="list-group-item">Admission Date: ${flash.items.data."admission-date"[0]}</li>
-                            <li class="list-group-item">Discharge Date: ${flash.items.data."discharge-date"[0]}</li>
-                            <li class="list-group-item">Total Gross: MYR${flash.items.data."total-gross"[0]}</li>
-                            <li class="list-group-item">Total Discount: MYR${flash.items.data."total-discount"[0]}</li>
-                            <li class="list-group-item">Total Payable: MYR${flash.items.data."total-net"[0]}</li>
+                            <li class="list-group-item">Patient NRIC: ${flash.items.data.nric?.getAt(0)}</li>
+                            <li class="list-group-item">Admission Date: ${flash.items.data."admission-date"?.getAt(0)}</li>
+                            <li class="list-group-item">Discharge Date: ${flash.items.data."discharge-date"?.getAt(0)}</li>
+                            <li class="list-group-item">Total Gross: MYR${flash.items.data."total-gross"?.getAt(0)}</li>
+                            <li class="list-group-item">Total Discount: MYR${flash.items.data."total-discount"?.getAt(0)}</li>
+                            <li class="list-group-item">Total Payable: MYR${flash.items.data."total-net"?.getAt(0)}</li>
                         </ul>
 
                         <div class="list-group">
@@ -52,18 +52,6 @@
                                 </g:each>
                             </a>
                         </div>
-
-                    </div>
-                </div>
-
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
-                        <img class="card-img-top" src="${assetPath(src: "${flash.image}")}">
-                    </div>
-                </div>
-
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
                         <table class="table table-dark">
                             <thead>
                             <tr>
@@ -82,6 +70,19 @@
                             </g:each>
                             </tbody>
                         </table>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 p-3">
+                    <div class="card box-shadow">
+                        <img class="card-img-top" src="${assetPath(src: "${flash.image}")}">
+                    </div>
+                </div>
+
+                <div class="col-md-6 p-3">
+                    <div class="card box-shadow">
                     </div>
                 </div>
 
