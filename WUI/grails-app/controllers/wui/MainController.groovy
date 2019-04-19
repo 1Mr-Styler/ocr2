@@ -19,12 +19,21 @@ class MainController {
             return
         }
 
+        boolean isPDF = false
+
         ArrayList<HashMap<String, Object>> files = new ArrayList<>()
         request.getFiles("img").each {
-            File chequeFile = mainService.toFile(it)
-            String chequeFilename = chequeFile.name
 
-            files.add(new HashMap<String, Object>(chequeFilename: chequeFilename, chequeFile: chequeFile))
+            if (!it.getOriginalFilename().endsWith(".pdf")) {
+
+                File chequeFile = mainService.toFile(it)
+                String chequeFilename = chequeFile.name
+
+                files.add(new HashMap<String, Object>(chequeFilename: chequeFilename, chequeFile: chequeFile))
+            } else {
+                isPDF = true
+                files = mainService.pdfToFile(it)
+            }
         }
 
 

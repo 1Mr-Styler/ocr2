@@ -11,8 +11,9 @@ ENV JAVA_VERSION 8.0.202-zulu
 RUN ["mkdir", "-p", "/apps/wui"] 
 RUN ["mkdir", "-p", "/model"] 
 COPY . /apps/ocr
-RUN apt-get update && apt-get install -y zip curl
+RUN apt-get update && apt-get install -y zip curl python2.7 python-pip python-argparse poppler-utils
 WORKDIR /apps/wui
+RUN pip2 install -r requirements.txt
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN curl -s "https://get.sdkman.io" | bash
 RUN chmod a+x "$SDKMAN_DIR/bin/sdkman-init.sh"
