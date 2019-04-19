@@ -5,7 +5,7 @@ LABEL description="Nubeslab OCR/NER 2"
 
 ENV SDKMAN_DIR /root/.sdkman
 ENV GRAILS_VERSION 3.3.9
-ENV JAVA_VERSION 8.0.201-oracle
+ENV JAVA_VERSION 8.0.212-zulu
 
 RUN ["mkdir", "-p", "/apps/ocr"] 
 RUN ["mkdir", "-p", "/model"] 

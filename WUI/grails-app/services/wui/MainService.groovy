@@ -33,12 +33,12 @@ class MainService {
 
         ArrayList<HashMap<String, String>> files = new ArrayList<>()
         proc.text.split("\n").each {
-            files.add([chequeFilename: it])
+            files.add([chequeFilename: it.replace("/model/images/", "")])
         }
 
         //Copy first image
         String nf = "/apps/wui/grails-app/assets/images/${newNameTemplate}0.jpg"
-        new File(nf).bytes = new File(files[0].chequeFilename).bytes
+        new File(nf).bytes = new File("/model/images/" + files[0].chequeFilename).bytes
 
 
         files
