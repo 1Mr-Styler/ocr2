@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''(?P<nric>\d{6}-\d{2}-\d{4})''')
+regex = (r'''(?P<nric>\d{6}-?\d{2}-?\d{4})''')
 
 test_str = ('''--text--''')
 

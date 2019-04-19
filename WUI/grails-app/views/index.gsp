@@ -52,18 +52,6 @@
                                 </g:each>
                             </a>
                         </div>
-
-                    </div>
-                </div>
-
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
-                        <img class="card-img-top" src="${assetPath(src: "${flash.image}")}">
-                    </div>
-                </div>
-
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
                         <table class="table table-dark">
                             <thead>
                             <tr>
@@ -82,6 +70,19 @@
                             </g:each>
                             </tbody>
                         </table>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 p-3">
+                    <div class="card box-shadow">
+                        <img class="card-img-top" src="${assetPath(src: "${flash.image}")}">
+                    </div>
+                </div>
+
+                <div class="col-md-6 p-3">
+                    <div class="card box-shadow">
                     </div>
                 </div>
 

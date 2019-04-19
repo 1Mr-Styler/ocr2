@@ -53,7 +53,7 @@ class MainController {
 
         JSONObject data = JSON.parse(resp.text)
 
-        println(resp.json)
+        println(resp.json.data)
 
         flash.items = data
 
