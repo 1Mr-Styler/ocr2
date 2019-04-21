@@ -2,6 +2,6 @@
 
 export JAVA_HOME=/root/.sdkman/candidates/java/current
 
-echo "~~~~~~~~~~~~~~~~~~~~~  Running WUI Server"
-./gradlew bootRun -Dgrails.server.port=8080
+echo "~~~~~~~~~~~~~~~~~~~~~  Running WUI Server Development"
+./gradlew bootRun --debug-jvm -Dgrails.server.port=8080
 

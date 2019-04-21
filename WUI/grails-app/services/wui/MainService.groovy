@@ -33,6 +33,7 @@ class MainService {
 
         ArrayList<HashMap<String, String>> files = new ArrayList<>()
         proc.text.split("\n").each {
+            reduce(it)
             files.add([chequeFilename: it.replace("/model/images/", "")])
         }
 
@@ -42,5 +43,11 @@ class MainService {
 
 
         files
+    }
+
+    void reduce(String filename) {
+        println("Optimizing $filename ...")
+        def proc = "python2.7 /model/reduce.pyc ${filename}".execute()
+        proc.waitFor()
     }
 }
