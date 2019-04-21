@@ -9,7 +9,7 @@ import java.util.regex.Matcher
 class ParserService {
 
     HashMap<String, String> runNER(String text, String path, ArrayList<String> bounds, int numOfDocs) {
-        println("Run NER.sh")
+        //println("Run NER.sh")
         HashMap<String, HashSet<Object>> fields = new HashMap<>()
 
         ArrayList<JSONObject> json = new ArrayList<>()
@@ -26,26 +26,26 @@ class ParserService {
         String dirLoc = "/model"
 
         def ner = "/bin/bash -c $dirLoc/ner.sh ${path}pred.txt".execute()
-        println("Before NER wait")
+        //println("Before NER wait")
         ner.waitFor()
-        println("After NER wait")
+        //println("After NER wait")
         String nerResult = ner.text
-        println("ner Size: ${nerResult.size()}")
+        //println("ner Size: ${nerResult.size()}")
 
         /*def outputStream = new StringBuffer();
         ner.waitForProcessOutput(outputStream, System.err);
-        println(outputStream.toString());*/
+        //println(outputStream.toString());*/
 
         nerResult += "\n"
 
-        println("Before Location wait")
+        //println("Before Location wait")
         def location = "$dirLoc/location.sh".execute()
         location.waitFor()
-        println("After Location wait")
+        //println("After Location wait")
         nerResult += location.text
-        println("+Loc Size: ${nerResult.size()}")
+        //println("+Loc Size: ${nerResult.size()}")
 
-//        println(nerResult)
+//        //println(nerResult)
 
         String template = new File("${path}/ner_template.py").getText('UTF-8')
 
@@ -66,7 +66,7 @@ class ParserService {
         def nircExtract = "/usr/bin/python2.7 /tmp/nric.py".execute()
         nircExtract.waitFor()
         String nric = nircExtract.text
-        println("NRIC: ${nric}")
+        //println("NRIC: ${nric}")
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -86,7 +86,7 @@ class ParserService {
                 def data = desc.split("---")
 
                 if (data[1].contains(".") && data[0].size() > 2 && data[1].size() > 2) {
-                    println("${data[0].trim()} = ${data[1]}")
+                    //println("${data[0].trim()} = ${data[1]}")
                     if (fields["items"] == null) {
                         fields.put("items", new HashSet<>([[data[0].trim(), data[1]]]))
                     } else fields["items"].add([data[0].trim(), data[1]])
@@ -111,7 +111,7 @@ class ParserService {
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        println(result)
+        //println(result)
         ArrayList<Double> amounts = [0d, 100000d]
         boolean hasAmount = false
         ArrayList<Double> _amounts = new ArrayList<>()
@@ -121,7 +121,7 @@ class ParserService {
         stuff.eachWithIndex { it, i ->
             if ((i + 1) != stuff.size()) {
                 List<String> field = it.split("----")
-                println(field)
+                //println(field)
                 field[0] = field[0].replace(",", '').toLowerCase()
 
                 if (field[1] != null) {
@@ -155,7 +155,7 @@ class ParserService {
                                 amt = Double.parseDouble(stripped)
                                 _amounts.add(amt)
                             } catch (NumberFormatException e) {
-                                println("Stripped: ${stripped}")
+                                //println("Stripped: ${stripped}")
                             }
                         }
                     }
@@ -179,7 +179,7 @@ class ParserService {
             }
         }
 
-//        println(fields)
+//        //println(fields)
         if (hasAmount) {
             Collections.sort(_amounts)
 
