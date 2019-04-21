@@ -15,7 +15,7 @@
 
                 <g:uploadForm controller="main" action="upload">
 
-                    <p>Select Imagess</p>
+                    <p>Select Images or PDF File</p>
                     <input type="file" class="btn btn-secondary m-2" name="img" multiple="multiple"/>
 
                     <p></p>
