@@ -41,7 +41,6 @@ class DocumentService {
 
         // write the image to a file
         try {
-//            image.transferTo(new File(file))
 
             new File(file).bytes = image.bytes
 
@@ -54,24 +53,6 @@ class DocumentService {
         }
     }
 
-    String predict(String file, String path, String sm2 = "") {
-        StringBuilder pred = new StringBuilder()
-
-        try {
-            def proc = "python ${path}ocr${sm2}.pyc ${file} checkpoint/model.ckpt-92900.data-00000-of-00001".execute()
-            def ypred = proc.in.getText('UTF-8').split("\n")
-
-            for (String line : ypred) {
-                pred.append(line)
-                pred.append("\n")
-            }
-
-            return pred.toString()
-
-        } catch (Exception e) {
-            throw new Exception(e)
-        }
-    }
 
     String predictOCR(String file) {
         StringBuilder pred = new StringBuilder()

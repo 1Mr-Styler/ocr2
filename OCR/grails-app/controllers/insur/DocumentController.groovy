@@ -33,8 +33,6 @@ class DocumentController {
         def document3 = null
         base64.add("")
 
-        int numOfImg = 1
-
 
         String path = grailsApplication.config.fileLocation.toString()
         ArrayList<String> files = new ArrayList<String>()
@@ -43,7 +41,6 @@ class DocumentController {
         String fileName = "${path}_${fileNameTemplate}.jpg"
         String fileName2 = "${path}_${fileNameTemplate}.txt"
         String fileName3 = "${path}_${fileNameTemplate}.txt.bounds"
-//        String fileName2 = "${path}_1555369770802.txt"
 
         documentService.b64ToFile(document, fileName)
 
