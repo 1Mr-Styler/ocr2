@@ -13,13 +13,13 @@ class ParserService {
         HashMap<String, HashSet<Object>> fields = new HashMap<>()
 
         ArrayList<JSONObject> json = new ArrayList<>()
-        bounds.each {
-            json.add(JSON.parse(it))
-        }
+//        bounds.each {
+//            json.add(JSON.parse(it))
+//        }
         File pred = new File("${path}pred.txt")
         ArrayList<String> tabTexts = new ArrayList<>()
-        json.each {
-            tabTexts.add(it.ParsedResults[0].ParsedText)
+        bounds.each {
+            tabTexts.add(it)
         }
         pred.text = text
 
