@@ -1,21 +1,14 @@
 package server
 
-import grails.converters.JSON
 import org.grails.web.json.JSONObject
 
 import java.text.SimpleDateFormat
-import java.util.regex.Matcher
 
 class ParserService {
 
     HashMap<String, String> runNER(String text, String path, ArrayList<String> bounds, int numOfDocs) {
-        //println("Run NER.sh")
         HashMap<String, HashSet<Object>> fields = new HashMap<>()
 
-        ArrayList<JSONObject> json = new ArrayList<>()
-//        bounds.each {
-//            json.add(JSON.parse(it))
-//        }
         File pred = new File("${path}pred.txt")
         ArrayList<String> tabTexts = new ArrayList<>()
         bounds.each {
@@ -26,26 +19,17 @@ class ParserService {
         String dirLoc = "/model"
 
         def ner = "/bin/bash -c $dirLoc/ner.sh ${path}pred.txt".execute()
-        //println("Before NER wait")
-        ner.waitFor()
-        //println("After NER wait")
-        String nerResult = ner.text
-        //println("ner Size: ${nerResult.size()}")
 
-        /*def outputStream = new StringBuffer();
-        ner.waitForProcessOutput(outputStream, System.err);
-        //println(outputStream.toString());*/
+        ner.waitFor()
+
+        String nerResult = ner.text
 
         nerResult += "\n"
 
-        //println("Before Location wait")
         def location = "$dirLoc/location.sh".execute()
         location.waitFor()
-        //println("After Location wait")
-        nerResult += location.text
-        //println("+Loc Size: ${nerResult.size()}")
 
-//        //println(nerResult)
+        nerResult += location.text
 
         String template = new File("${path}/ner_template.py").getText('UTF-8')
 
@@ -66,7 +50,6 @@ class ParserService {
         def nircExtract = "/usr/bin/python2.7 /tmp/nric.py".execute()
         nircExtract.waitFor()
         String nric = nircExtract.text
-        //println("NRIC: ${nric}")
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -86,7 +69,6 @@ class ParserService {
                 def data = desc.split("---")
 
                 if (data[1].contains(".") && data[0].size() > 2 && data[1].size() > 2) {
-                    //println("${data[0].trim()} = ${data[1]}")
                     if (fields["items"] == null) {
                         fields.put("items", new HashSet<>([[data[0].trim(), data[1]]]))
                     } else fields["items"].add([data[0].trim(), data[1]])
