@@ -72,14 +72,12 @@ class DocumentController {
         try {
             println("Files: ${files.size()}")
             files.eachWithIndex { file, i ->
-                String pred = documentService.predict(file, path)
-                String sm2 = documentService.predict(file, path, "2")
-//                String pred = new File("${path}/_1555369770802.txt").getText('UTF-8')
-                texts.add(pred)
+                String sm2 = documentService.predictOCR(file)
                 boundedTexts.add(sm2)
             }
 
             //~~~~~~~~~~~~~~~ Preprocess plain text ~~~~~~~~~~~~
+            texts = boundedTexts
             File textPred = new File(fileName2)
             String allText = ""
             texts.each { txt ->

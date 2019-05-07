@@ -73,95 +73,24 @@ class DocumentService {
         }
     }
 
-    String prepareFiles(String template, String path, String pred, String pattern) {
+    String predictOCR(String file) {
+        StringBuilder pred = new StringBuilder()
 
-        println("pattern ${pattern}")
-        println()
-        String f = template.replaceFirst("--regex--", pattern)
-        String g = f.replace("--text--", pred)
-        File regexpy = new File("${path}regex.py")
-        regexpy.text = g
+        try {
+            def proc = "sbs ${file} /tmp/out --oem 1".execute()
+            proc.waitFor()
+            def ypred = new File("/tmp/out.txt").getText('UTF-8').split("\n")
 
-        def reg = "python ${path}regex.py".execute()
-        String result = reg.text
+            for (String line : ypred) {
+                pred.append(line)
+                pred.append("\n")
+            }
+            return pred.toString()
 
-        return result
-    }
-
-    ArrayList<String> populate(String type) {
-        switch (type) {
-            case "motor":
-                ArrayList<String> populate = [
-                        "name",
-                        "policy_number",
-                        "address",
-                        "nric",
-                        "occupation",
-                        "expiry_date",
-                        "reg_date",
-                        "year",
-                        "make",
-                        "seater",
-                        "coverage_amount",
-                        "premium",
-                ]
-                return populate
-                break
-            case "health":
-                ArrayList<String> populate = [
-                        "name",
-                        "policy_number",
-                        "address",
-                        "occupation",
-                        "reg_date",
-                        "expiry_date",
-                        "beneficiary",
-                        "coverage_type",
-                        "premium",
-                ]
-                return populate
-                break
-            case "life":
-                ArrayList<String> populate = [
-                        "name",
-                        "policy_number",
-                        "address",
-                        "nric",
-                        "occupation",
-                        "expiry_date",
-                        "reg_date",
-                        "beneficiary",
-                        "mop",
-                        "type",
-                        "coverage_amount",
-                        "premium",
-                ]
-                return populate
-                break
-            case "travel":
-                ArrayList<String> populate = [
-                        "name",
-                        "address",
-                        "premium",
-                        "policy_number",
-                        "reg_date",
-                        "expiry_date",
-                        "occupation",
-                        "nric",
-                        "coverage_amount",
-                ]
-                return populate
-                break
-            default:
-                ArrayList<String> populate = [
-                        "name",
-                        "policy_number",
-                        "expiry_date",
-                        "coverage_amount",
-                        "premium",
-                ]
-                return populate
-
+        } catch (Exception e) {
+            println(e)
+            throw new Exception(e)
         }
     }
+
 }
