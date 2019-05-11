@@ -53,8 +53,56 @@ class ParserService {
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+        //~~~~~~~~~~~~~~ Extract Bill Number ~~~~~~~~~~~~~
+        String billTemplate = new File("${path}/bill.py").getText('UTF-8')
+
+        String bt = billTemplate.replace("--text--", nerResult)
+        File billpy = new File("/tmp/bill.py")
+        billpy.text = bt
+
+        def billExtract = "/usr/bin/python2.7 /tmp/bill.py".execute()
+        billExtract.waitFor()
+        String bill = billExtract.text
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        //~~~~~~~~~~~~~~ Extract Bill Date ~~~~~~~~~~~~~
+        billTemplate = new File("${path}/bill-date.py").getText('UTF-8')
+
+        bt = billTemplate.replace("--text--", nerResult)
+        billpy = new File("/tmp/bill-date.py")
+        billpy.text = bt
+
+        billExtract = "/usr/bin/python2.7 /tmp/bill-date.py".execute()
+        billExtract.waitFor()
+        String billDate = billExtract.text.trim()
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        //~~~~~~~~~~~~~~ Extract GL ~~~~~~~~~~~~~
+        billTemplate = new File("${path}/gl.py").getText('UTF-8')
+
+        bt = billTemplate.replace("--text--", nerResult)
+        billpy = new File("/tmp/gl.py")
+        billpy.text = bt
+
+        billExtract = "/usr/bin/python2.7 /tmp/gl.py".execute()
+        billExtract.waitFor()
+        String gl = billExtract.text.trim()
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        //~~~~~~~~~~~~~~ Extract Charge Type ~~~~~~~~~~~~~
+        billTemplate = new File("${path}/ct.py").getText('UTF-8')
+
+        bt = billTemplate.replace("--text--", nerResult)
+        billpy = new File("/tmp/ct.py")
+        billpy.text = bt
+
+        billExtract = "/usr/bin/python2.7 /tmp/ct.py".execute()
+        billExtract.waitFor()
+        String charge = billExtract.text.trim()
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         //~~~~~~~~~~~~~~ Extract Info ~~~~~~~~~~~~~
-        tabTexts.each {tabText ->
+        tabTexts.each { tabText ->
             String batchTemplate = new File("${path}/batch_process.py").getText('UTF-8')
 
             String batchPyfileString = batchTemplate.replace("--text--", tabText)
@@ -68,23 +116,27 @@ class ParserService {
             batch.split("\n").each { desc ->
                 def data = desc.split("---")
 
-                if (data[1].contains(".") && data[0].size() > 2 && data[1].size() > 2) {
-                    if (fields["items"] == null) {
-                        fields.put("items", new HashSet<>([[data[0].trim(), data[1]]]))
-                    } else fields["items"].add([data[0].trim(), data[1]])
+                try {
+                    if (data[1].contains(".") && data[0].size() > 2 && data[1].size() > 2) {
+                        if (fields["items"] == null) {
+                            fields.put("items", new HashSet<>([[data[0].trim(), data[1]]]))
+                        } else fields["items"].add([data[0].trim(), data[1]])
+                    }
+                } catch (ignored) {
+
                 }
             }
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         //~~~~~~~~~~~~~~ Parse Names ~~~~~~~~~~~~~
-        tabTexts.each {tabText ->
+        tabTexts.each { tabText ->
             String exTemplate = new File("${path}/ex.py").getText('UTF-8')
 
             String exPyfileString = exTemplate.replace("--text--", tabText)
 
             File exPyfile = new File("/tmp/ex.py")
-            exPyfile .text = exPyfileString
+            exPyfile.text = exPyfileString
 
             def exExtract = "/usr/bin/python2.7 /tmp/ex.py".execute()
             exExtract.waitFor()
@@ -184,6 +236,19 @@ class ParserService {
 
         if (nric.size() > 0) {
             fields.put("nric", new HashSet<>([nric.split("\n")[0]]))
+        }
+
+        if (bill.size() > 0) {
+            fields.put("bill", new HashSet<>([bill.split("\n")[0]]))
+        }
+        if (billDate.size() > 0) {
+            fields.put("bill-date", new HashSet<>([billDate.split("\n")[0]]))
+        }
+        if (gl.size() > 0) {
+            fields.put("gl", new HashSet<>([gl.split("\n")[0]]))
+        }
+        if (charge.size() > 0) {
+            fields.put("charge", new HashSet<>([charge.split("\n")[0]]))
         }
 
         fields["date"] = null
