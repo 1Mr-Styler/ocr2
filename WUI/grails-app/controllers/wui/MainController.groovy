@@ -38,7 +38,13 @@ class MainController {
 
 
         flash.hasUpload = true
-        flash.image = files[0].chequeFilename
+        def image = new ArrayList<String>()
+
+        files.each {
+            image.add(it.chequeFilename)
+        }
+
+        flash.image = image
 
         RestBuilder rest = new RestBuilder()
 

@@ -37,10 +37,11 @@ class MainService {
             files.add([chequeFilename: it.replace("/model/images/", "")])
         }
 
-        //Copy first image
-        String nf = "/apps/wui/grails-app/assets/images/${newNameTemplate}0.jpg"
-        new File(nf).bytes = new File("/model/images/" + files[0].chequeFilename).bytes
-
+        //Copy all images
+        files.eachWithIndex { file, i ->
+            String nf = "/apps/wui/grails-app/assets/images/${newNameTemplate}${i}.jpg"
+            new File(nf).bytes = new File("/model/images/" + file.chequeFilename).bytes
+        }
 
         files
     }
