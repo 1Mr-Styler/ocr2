@@ -129,6 +129,7 @@ class ParserService {
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+        fields.put("patient-names", new HashSet<>([]))
         //~~~~~~~~~~~~~~ Parse Names ~~~~~~~~~~~~~
         tabTexts.each { tabText ->
             String exTemplate = new File("${path}/ex.py").getText('UTF-8')
@@ -141,7 +142,8 @@ class ParserService {
             def exExtract = "/usr/bin/python2.7 /tmp/ex.py".execute()
             exExtract.waitFor()
             String names = exExtract.text
-            fields.put("patient-names", new HashSet<>([names]))
+            if (names.length() > 2)
+                fields.put("patient-names", new HashSet<>([names]))
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
