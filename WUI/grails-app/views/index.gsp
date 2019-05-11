@@ -32,7 +32,7 @@
                 <div class="col-md-6 p-3">
                     <div class="card box-shadow">
                         <ul class="list-group">
-                            <li class="list-group-item">Patient Name: ${flash.items?.data?."patient-names"?.getAt(0).toString().split("\n")[0]}</li>
+                            <li class="list-group-item">Patient Name: ${flash.items?.data?."patient-names"?.getAt(0).toString().split("\n")[-1]}</li>
                             <li class="list-group-item">Patient NRIC: ${flash.items?.data?.nric?.getAt(0)}</li>
                             <li class="list-group-item">Bill No: ${flash.items?.data?.bill?.getAt(0)}</li>
                             <li class="list-group-item">Bill Date/Time: ${flash.items?.data?."bill-date"?.getAt(0)}</li>
@@ -80,8 +80,10 @@
                 </div>
 
                 <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
-                        <img class="card-img-top" src="${assetPath(src: "${flash.image}")}">
+                    <div class="card box-shadow" style="max-height: 680px; overflow-y: scroll">
+                        <g:each in="${flash.image}" var="image">
+                            <img class="card-img-top" src="${assetPath(src: "${image}")}">
+                        </g:each>
                     </div>
                 </div>
 
