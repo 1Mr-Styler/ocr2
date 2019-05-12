@@ -71,6 +71,11 @@ class MainController {
         println(resp.json.data)
 
         flash.items = data
+        double sub = 0d
+        data.data.items.each{
+            sub += it[1].toString().replace(",", "").toDouble()
+        }
+        flash.sub = sub
 
 
         chain action: "index"
