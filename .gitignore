@@ -7,3 +7,4 @@ build/
 .idea/
 model/ner.py
 !requirements.txt
+*.pdf
