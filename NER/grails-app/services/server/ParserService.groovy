@@ -117,10 +117,19 @@ class ParserService {
                 def data = desc.split("---")
 
                 try {
-                    if (data[1].contains(".") && data[0].size() > 2 && data[1].size() > 2) {
+                    String poi = data[1]
+                            .replace("~", "")
+                            .replace("_", "")
+                            .replace("\\", "")
+                            .replace("/", "")
+                            .replaceFirst("[a-zA-Z]", "")
+                            .trim()
+                            .split(" ")[0]
+                    println data[0] + "\t--->\t" + poi + "\t--->\t" + data[1]
+                    if (poi.contains(".") && data[0].size() > 2 && poi.size() > 2 && !poi.matches(".*[a-zA-Z]+.*")) {
                         if (fields["items"] == null) {
-                            fields.put("items", new HashSet<>([[data[0].trim(), data[1]]]))
-                        } else fields["items"].add([data[0].trim(), data[1]])
+                            fields.put("items", new HashSet<>([[data[0].trim(), poi]]))
+                        } else fields["items"].add([data[0].trim(), poi])
                     }
                 } catch (ignored) {
 

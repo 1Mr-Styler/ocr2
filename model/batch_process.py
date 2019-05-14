@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''((?=[A-Z])[A-Z\s\n]+)\s+\n?([0-9\.,]+)''')
+regex = (r'''((?=[A-Z])[A-Z\s\n]+)\s+\n?(?P<valuable>.+)?([0-9\.,]+)''')
 
 test_str = ('''--text--''')
 
@@ -20,10 +20,26 @@ for matchNum, match in enumerate(matches):
             print("{0}---{1}".format(m[0], m[1]))
             # print "<<--------------------------------------------------------------------------->>"
     if len(m) == 2:
-        print("{0}---{1}".format(m[0], m[1]))
+        if "doctor" in m[1].lower():
+            try:
+                doctor = m[1].split(":")
+                info = re.split("([0-9.]+)", doctor[1].strip())
+                print("{0}---{1}".format(info[0], info[1]))
+            except Exception as e:
+                pass
+        else:
+            print("{0}---{1}".format(m[0], m[1]))
         # print "<<--------------------------------------------------------------------------->>"
     if len(m) == 3:
-        print("{0}---{1}".format(m[0], m[2]))
+        if "doctor" in m[2].lower():
+            try:
+                doctor = m[2].split(":")
+                info = re.split("([0-9.]+)", doctor[1].strip())
+                print("{0}---{1}".format(info[0], info[1]))
+            except Exception as e:
+                pass
+        else:
+            print("{0}---{1}".format(m[0], m[2]))
         # print "<<--------------------------------------------------------------------------->>"
     if len(m) == 5:
         print("{0}---{1}".format(m[2], m[4]))

@@ -74,7 +74,7 @@
                             </g:each>
                             <tr>
                                 <th scope="row"></th>
-                                <td contenteditable style="text-align: right">Subtotal</td>
+                                <td style="text-align: right">Subtotal</td>
                                 <td contenteditable>${flash.sub}</td>
                             </tr>
                             </tbody>
