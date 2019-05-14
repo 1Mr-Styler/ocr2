@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 class ParserService {
 
     HashMap<String, String> runNER(String text, String path, ArrayList<String> bounds, int numOfDocs) {
-        HashMap<String, HashSet<Object>> fields = new HashMap<>()
+        HashMap<String, LinkedHashSet<Object>> fields = new HashMap<>()
 
         File pred = new File("${path}pred.txt")
         ArrayList<String> tabTexts = new ArrayList<>()
@@ -129,28 +129,36 @@ class ParserService {
                 def data = desc.split("---")
 
                 try {
-                    String poi = data[1]
+                    ArrayList<String> _poi = data[1]
                             .replace("~", "")
                             .replace("_", "")
                             .replace("\\", "")
                             .replace("/", "")
                             .replaceFirst("[a-zA-Z]", "")
                             .trim()
-                            .split(" ")[0]
-                    println data[0] + "\t--->\t" + poi + "\t--->\t" + data[1]
-                    if (poi.contains(".") && data[0].size() > 2 && poi.size() > 2 && !poi.matches(".*[a-zA-Z]+.*")) {
+                            .split(" ")
+                    String subtotal = _poi[0]
+                    String discountAmt = _poi[1] ?: "0.00"
+                    String taxAmt = _poi[2] ?: "0.00"
+                    String totalAmt = _poi[3] ?: "0.00"
+
+
+                    if (subtotal.contains(".") && data[0].size() > 2 && subtotal.size() > 2 && !subtotal.matches(".*[a-zA-Z]+.*")) {
                         if (fields["items"] == null) {
-                            fields.put("items", new HashSet<>([[data[0].trim(), poi]]))
-                        } else fields["items"].add([data[0].trim(), poi])
+                            fields.put("items", new LinkedHashSet<>([[data[0].trim(), subtotal, discountAmt, taxAmt, totalAmt]]))
+                        } else fields["items"].add([data[0].trim(), subtotal, discountAmt, taxAmt, totalAmt])
+
+                        println data[0] + "\t--->\t" + subtotal + "\t--->\t" + data[1]
                     }
                 } catch (ignored) {
+                    println(ignored)
 
                 }
             }
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        fields.put("patient-names", new HashSet<>([]))
+        fields.put("patient-names", new LinkedHashSet<>([]))
         //~~~~~~~~~~~~~~ Parse Names ~~~~~~~~~~~~~
         tabTexts.each { tabText ->
             String exTemplate = new File("${path}/ex.py").getText('UTF-8')
@@ -164,7 +172,7 @@ class ParserService {
             exExtract.waitFor()
             String names = exExtract.text
             if (names.length() > 2)
-                fields.put("patient-names", new HashSet<>([names]))
+                fields.put("patient-names", new LinkedHashSet<>([names]))
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -193,10 +201,10 @@ class ParserService {
                     } else {
                         if (field[1].contains("\n")) {
                             field[1].split("\n").each { f ->
-                                fields.put(field[0], new HashSet<>([f]))
+                                fields.put(field[0], new LinkedHashSet<>([f]))
                             }
                         } else {
-                            fields.put(field[0], new HashSet<>([field[1]]))
+                            fields.put(field[0], new LinkedHashSet<>([field[1]]))
                         }
                     }
 
@@ -245,58 +253,58 @@ class ParserService {
             if (!discount.empty) {
                 if (discount.contains(" ")) {
                     def totals = discount.split(" ")
-                    fields.put("total-gross", new HashSet<>([totals[0]]))
-                    fields.put("total-discount", new HashSet<>([totals[1]]))
-                    fields.put("total-net", new HashSet<>([totals[1]]))
+                    fields.put("total-gross", new LinkedHashSet<>([totals[0]]))
+                    fields.put("total-discount", new LinkedHashSet<>([totals[1]]))
+                    fields.put("total-net", new LinkedHashSet<>([totals[1]]))
 
                 } else {
-                    fields.put("total-gross", new HashSet<>([amounts[0]]))
-                    fields.put("total-net", new HashSet<>([amounts[1]]))
-                    fields.put("total-discount", new HashSet<>([discount]))
+                    fields.put("total-gross", new LinkedHashSet<>([amounts[0]]))
+                    fields.put("total-net", new LinkedHashSet<>([amounts[1]]))
+                    fields.put("total-discount", new LinkedHashSet<>([discount]))
                 }
             } else {
-                fields.put("total-gross", new HashSet<>([amounts[0]]))
-                fields.put("total-net", new HashSet<>([amounts[1]]))
-                fields.put("total-discount", new HashSet<>([amounts[0] - amounts[1]]))
+                fields.put("total-gross", new LinkedHashSet<>([amounts[0]]))
+                fields.put("total-net", new LinkedHashSet<>([amounts[1]]))
+                fields.put("total-discount", new LinkedHashSet<>([amounts[0] - amounts[1]]))
             }
 
             fields.remove("amount")
-            fields.put("amount", new HashSet<>(_amounts))
+            fields.put("amount", new LinkedHashSet<>(_amounts))
         }
 
         //Date
         Collections.sort(dates);
         if (dates.size() > 1) {
-            fields.put("admission-date", new HashSet<>([dates[0].format("dd/MM/yyyy")]))
-            fields.put("discharge-date", new HashSet<>([dates[-1].format("dd/MM/yyyy")]))
+            fields.put("admission-date", new LinkedHashSet<>([dates[0].format("dd/MM/yyyy")]))
+            fields.put("discharge-date", new LinkedHashSet<>([dates[-1].format("dd/MM/yyyy")]))
         }
 
         if (nric.size() > 0) {
-            fields.put("nric", new HashSet<>([nric.split("\n")[0]]))
+            fields.put("nric", new LinkedHashSet<>([nric.split("\n")[0]]))
         }
 
         if (bill.size() > 0) {
-            fields.put("bill", new HashSet<>([bill.split("\n")[0]]))
+            fields.put("bill", new LinkedHashSet<>([bill.split("\n")[0]]))
         }
         if (billDate.size() > 0) {
-            fields.put("bill-date", new HashSet<>([billDate.split("\n")[0]]))
+            fields.put("bill-date", new LinkedHashSet<>([billDate.split("\n")[0]]))
         }
         if (gl.size() > 0) {
-            fields.put("gl", new HashSet<>([gl.split("\n")[0]]))
+            fields.put("gl", new LinkedHashSet<>([gl.split("\n")[0]]))
         }
         if (charge.size() > 0) {
-            fields.put("charge", new HashSet<>([charge.split("\n")[0]]))
+            fields.put("charge", new LinkedHashSet<>([charge.split("\n")[0]]))
         }
 
         fields["date"] = null
-        fields["date"] = new HashSet<>()
+        fields["date"] = new LinkedHashSet<>()
         dates.each {
             date ->
                 fields["date"].add(date.format("dd/MM/yyyy"))
         }
 
 
-        Set locations = new HashSet<>()
+        Set locations = new LinkedHashSet<>()
         fields["location"].each {
             if (it.matches(".*\\d+.*") || it.length() < 5) {
 //                fields["location"].remove(it)
@@ -309,7 +317,7 @@ class ParserService {
 
         }
 
-        Set issuer = new HashSet<>()
+        Set issuer = new LinkedHashSet<>()
         fields["organization"].each {
             if (it.toLowerCase().contains("berhad") || it.toLowerCase().contains("bhd")) {
                 issuer.add(it)
@@ -325,7 +333,7 @@ class ParserService {
         fields["person"].each {
             if (!it.contains("\n")) {
                 if (fields["name"] == null) {
-                    fields.put("name", new HashSet<>([it]))
+                    fields.put("name", new LinkedHashSet<>([it]))
                 } else fields["name"].add(it)
             }
         }

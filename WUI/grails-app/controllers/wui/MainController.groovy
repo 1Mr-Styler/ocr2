@@ -70,12 +70,25 @@ class MainController {
 
         println(resp.json.data)
 
-        flash.items = data
         double sub = 0d
-        data.data.items.each{
+        double total = 0d
+        double discs = 0d
+        double tax = 0d
+        data.data.items.each {
             sub += it[1].toString().replace(",", "").toDouble()
+            discs += it[2].toString().replace(",", "").toDouble()
+            tax += it[3].toString().replace(",", "").toDouble()
+            double mTotal = it[4].toString().replace(",", "").toDouble()
+            if (mTotal == 0) {
+                it[4] = it[1].toString()
+            }
+            total += it[4].toString().replace(",", "").toDouble()
         }
+        flash.items = data
         flash.sub = sub.round(2)
+        flash.discount = discs.round(2)
+        flash.tax = tax.round(2)
+        flash.total = total.round(2)
 
 
         chain action: "index"
