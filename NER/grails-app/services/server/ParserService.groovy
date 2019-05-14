@@ -101,6 +101,18 @@ class ParserService {
         String charge = billExtract.text.trim()
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+        //~~~~~~~~~~~~~~ Extract Amounts ~~~~~~~~~~~~~
+        billTemplate = new File("${path}/amounts.py").getText('UTF-8')
+
+        bt = billTemplate.replace("--text--", nerResult)
+        billpy = new File("/tmp/amounts.py")
+        billpy.text = bt
+
+        billExtract = "/usr/bin/python2.7 /tmp/amounts.py".execute()
+        billExtract.waitFor()
+        String discount = billExtract.text.trim()
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         //~~~~~~~~~~~~~~ Extract Info ~~~~~~~~~~~~~
         tabTexts.each { tabText ->
             String batchTemplate = new File("${path}/batch_process.py").getText('UTF-8')
@@ -230,9 +242,23 @@ class ParserService {
 
             amounts[0] = _amounts.reverse()[0]
             amounts[1] = _amounts.reverse()[1]
-            fields.put("total-gross", new HashSet<>([amounts[0]]))
-            fields.put("total-net", new HashSet<>([amounts[1]]))
-            fields.put("total-discount", new HashSet<>([amounts[0] - amounts[1]]))
+            if (!discount.empty) {
+                if (discount.contains(" ")) {
+                    def totals = discount.split(" ")
+                    fields.put("total-gross", new HashSet<>([totals[0]]))
+                    fields.put("total-discount", new HashSet<>([totals[1]]))
+                    fields.put("total-net", new HashSet<>([totals[1]]))
+
+                } else {
+                    fields.put("total-gross", new HashSet<>([amounts[0]]))
+                    fields.put("total-net", new HashSet<>([amounts[1]]))
+                    fields.put("total-discount", new HashSet<>([discount]))
+                }
+            } else {
+                fields.put("total-gross", new HashSet<>([amounts[0]]))
+                fields.put("total-net", new HashSet<>([amounts[1]]))
+                fields.put("total-discount", new HashSet<>([amounts[0] - amounts[1]]))
+            }
 
             fields.remove("amount")
             fields.put("amount", new HashSet<>(_amounts))
