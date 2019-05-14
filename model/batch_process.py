@@ -23,7 +23,7 @@ for matchNum, match in enumerate(matches):
         if "doctor" in m[1].lower():
             try:
                 doctor = m[1].split(":")
-                info = re.split("([0-9.]+)", doctor[1].strip())
+                info = re.split("([0-9.,]+)", doctor[1].strip())
                 print("{0}---{1}".format(info[0], info[1]))
             except Exception as e:
                 pass
@@ -34,7 +34,7 @@ for matchNum, match in enumerate(matches):
         if "doctor" in m[2].lower():
             try:
                 doctor = m[2].split(":")
-                info = re.split("([0-9.]+)", doctor[1].strip())
+                info = re.split("([0-9.,]+)", doctor[1].strip())
                 print("{0}---{1}".format(info[0], info[1]))
             except Exception as e:
                 pass
@@ -44,5 +44,7 @@ for matchNum, match in enumerate(matches):
     if len(m) == 5:
         print("{0}---{1}".format(m[2], m[4]))
         # print "<<--------------------------------------------------------------------------->>"
+    if len(m) > 5:
+        print("{0}---{1}".format(m[len(m)-2], m[-1]))
 
 # Note: for Python 2.7 compatibility, use ur"" to prefix the regex and u"" to prefix the test string and substitution.

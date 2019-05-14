@@ -75,7 +75,7 @@ class MainController {
         data.data.items.each{
             sub += it[1].toString().replace(",", "").toDouble()
         }
-        flash.sub = sub
+        flash.sub = sub.round(2)
 
 
         chain action: "index"
