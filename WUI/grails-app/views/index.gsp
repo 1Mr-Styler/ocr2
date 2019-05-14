@@ -62,6 +62,9 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Amount</th>
+                                <th scope="col">Disc.</th>
+                                <th scope="col">Tax</th>
+                                <th scope="col">Total</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -70,12 +73,18 @@
                                     <th scope="row">${i + 1}</th>
                                     <td contenteditable>${item[0]}</td>
                                     <td contenteditable>${item[1]}</td>
+                                    <td contenteditable>${item[2]}</td>
+                                    <td contenteditable>${item[3]}</td>
+                                    <td contenteditable>${item[4]}</td>
                                 </tr>
                             </g:each>
                             <tr>
                                 <th scope="row"></th>
                                 <td style="text-align: right">Subtotal</td>
                                 <td contenteditable>${flash.sub}</td>
+                                <td>${flash.discount}</td>
+                                <td>${flash.tax}</td>
+                                <td>${flash.total}</td>
                             </tr>
                             </tbody>
                         </table>
