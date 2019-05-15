@@ -265,7 +265,7 @@ class ParserService {
             } else {
                 fields.put("total-gross", new LinkedHashSet<>([amounts[0]]))
                 fields.put("total-net", new LinkedHashSet<>([amounts[1]]))
-                fields.put("total-discount", new LinkedHashSet<>([amounts[0] - amounts[1]]))
+                fields.put("total-discount", new LinkedHashSet<>([(amounts[0] - amounts[1]).round(2)]))
             }
 
             fields.remove("amount")

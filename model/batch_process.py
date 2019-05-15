@@ -19,6 +19,9 @@ for matchNum, match in enumerate(matches):
         if len(m) == 2:
             print("{0}---{1}".format(m[0], m[1]))
             # print "<<--------------------------------------------------------------------------->>"
+        elif len(m) == 1:
+            info = re.split("([0-9.,]+)", m[0].strip())
+            print("{0}---{1}".format(info[0].strip(), ''.join(info[1:])))
     if len(m) == 2:
         if "doctor" in m[1].lower():
             try:
