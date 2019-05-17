@@ -56,7 +56,7 @@
                                 </g:each>
                             </a>
                         </div>
-                        <table class="table table-dark">
+                        <table class="display" id="example" style="width:100%">
                             <thead>
                             <tr>
                                 <th scope="col">No</th>
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="col-md-6 p-3">
-                    <div class="card box-shadow" style="max-height: 680px; overflow-y: scroll">
+                    <div class="card box-shadow" >
                         <g:each in="${flash.image}" var="image">
                             <img class="card-img-top" src="${assetPath(src: "${image}")}">
                         </g:each>
