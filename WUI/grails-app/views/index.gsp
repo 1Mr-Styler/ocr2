@@ -3,6 +3,106 @@
 <head>
     <meta name="layout" content="main"/>
     <title></title>
+
+    <style type="text/css">
+
+    .ques {
+        color: darkslateblue;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 130px;
+        height: 50px;
+    }
+
+    .switch input {display:none;}
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #f2f2f2;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        z-index: 2;
+        content: "";
+        height: 48px;
+        width: 48px;
+        left: 2px;
+        bottom: 2px;
+        background-color: darkslategrey;
+        -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+        -webkit-transition: .4s;
+        transition: all 0.4s ease-in-out;
+    }
+    .slider:after {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        content: "YES";
+        font-size: 22px;
+        text-align: left !important;
+        line-height: 44px;
+        padding-left: 0;
+        width: 130px;
+        color: #fff;
+        height: 50px;
+        border-radius: 100px;
+        background-color: #ff6418;
+        -webkit-transform: translateX(-80px);
+        -ms-transform: translateX(-80px);
+        transform: translateX(-80px);
+        transition: all 0.4s ease-in-out;
+    }
+
+    input:checked + .slider:after {
+        -webkit-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        transform: translateX(0px);
+        /*width: 235px;*/
+        padding-left: 25px;
+    }
+
+    input:checked + .slider:before {
+        background-color: #fff;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(80px);
+        -ms-transform: translateX(80px);
+        transform: translateX(80px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 100px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+    .absolute-no {
+        position: absolute;
+        left: 0;
+        color: darkslategrey;
+        text-align: right !important;
+        font-size: 22px;
+        width: calc(100% - 25px);
+        height: 50px;
+        line-height: 44px;
+        cursor: pointer;
+    }
+    </style>
 </head>
 
 <body>
@@ -17,6 +117,13 @@
 
                     <p>Select Images or PDF File</p>
                     <input type="file" class="btn btn-secondary m-2" name="img" multiple="multiple"/>
+                    <br/>
+                    <h4 class="ques">Process Descriptions?</h4>
+                    <label class="switch">
+                        <input type="checkbox" name="pd">
+                        <span class="slider round"></span>
+                        <span class="absolute-no">NO</span>
+                    </label>
 
                     <p></p>
                     <g:submitButton name="upload" value="Upload"/>
@@ -32,17 +139,27 @@
                 <div class="col-md-6 p-3">
                     <div class="card box-shadow">
                         <ul class="list-group">
-                            <li class="list-group-item" contenteditable>Patient Name: ${flash.items?.data?."patient-names"?.getAt(0).toString().split("\n")[-1]}</li>
-                            <li class="list-group-item" contenteditable>Patient NRIC: ${flash.items?.data?.nric?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Bill No: ${flash.items?.data?.bill?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Bill Date/Time: ${flash.items?.data?."bill-date"?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Patient Name: ${flash.items?.data?."patient-names"?.getAt(0).toString().split("\n")[-1]}</li>
+                            <li class="list-group-item"
+                                contenteditable>Patient NRIC: ${flash.items?.data?.nric?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Bill No: ${flash.items?.data?.bill?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Bill Date/Time: ${flash.items?.data?."bill-date"?.getAt(0)}</li>
                             <li class="list-group-item" contenteditable>GL No: ${flash.items?.data?.gl?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Charge Type: ${flash.items?.data?.charge?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Admission Date: ${flash.items?.data?."admission-date"?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Discharge Date: ${flash.items?.data?."discharge-date"?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Total Gross: MYR${flash.items?.data?."total-gross"?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Total Discount: MYR${flash.items?.data?."total-discount"?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>Total Payable: MYR${flash.items?.data?."total-net"?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Charge Type: ${flash.items?.data?.charge?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Admission Date: ${flash.items?.data?."admission-date"?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Discharge Date: ${flash.items?.data?."discharge-date"?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Total Gross: MYR${flash.items?.data?."total-gross"?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Total Discount: MYR${flash.items?.data?."total-discount"?.getAt(0)}</li>
+                            <li class="list-group-item"
+                                contenteditable>Total Payable: MYR${flash.items?.data?."total-net"?.getAt(0)}</li>
                         </ul>
 
                         <div class="list-group">
@@ -89,12 +206,11 @@
                             </tbody>
                         </table>
 
-
                     </div>
                 </div>
 
                 <div class="col-md-6 p-3">
-                    <div class="card box-shadow" >
+                    <div class="card box-shadow">
                         <g:each in="${flash.image}" var="image">
                             <img class="card-img-top" src="${assetPath(src: "${image}")}">
                         </g:each>

@@ -17,7 +17,7 @@ class MainService {
         convFile
     }
 
-    ArrayList<HashMap<String, Object>> pdfToFile(def stuff) {
+    ArrayList<HashMap<String, Object>> pdfToFile(def stuff, boolean desc = false) {
 
         String pdfLocation = "/model/images/" + stuff.getOriginalFilename().replace(" ", "")
 
@@ -27,13 +27,13 @@ class MainService {
         String newNameTemplate = stuff.getOriginalFilename().replace(".pdf", "-pdf").replace(" ", "")
 
         //xtract PDF
-        def proc = "python2.7 /model/pdf2jpg.py ${pdfLocation} /model/images/${newNameTemplate}".execute()
+        def proc = desc ? "python2.7 /model/rpdf2jpg.py ${pdfLocation} /model/images/${newNameTemplate}".execute() : "python2.7 /model/pdf2jpg.py ${pdfLocation} /model/images/${newNameTemplate}".execute()
         proc.waitFor()
 
 
         ArrayList<HashMap<String, String>> files = new ArrayList<>()
         proc.text.split("\n").each {
-            reduce(it)
+//            reduce(it)
             files.add([chequeFilename: it.replace("/model/images/", "")])
         }
 
@@ -42,6 +42,8 @@ class MainService {
             String nf = "/apps/wui/grails-app/assets/images/${newNameTemplate}${i}.jpg"
             new File(nf).bytes = new File("/model/images/" + file.chequeFilename).bytes
         }
+        if(desc)
+            files = files.reverse()
 
         files
     }
