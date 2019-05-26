@@ -20,8 +20,13 @@ class MainController {
         }
 
         boolean isPDF = false
+        boolean processDesc = false
+        if(params.pd != null && params.pd == "on") {
+            processDesc = true;
+        }
 
         ArrayList<HashMap<String, Object>> files = new ArrayList<>()
+        ArrayList<HashMap<String, Object>> rfiles = new ArrayList<>()
         request.getFiles("img").each {
 
             if (!it.getOriginalFilename().endsWith(".pdf")) {
@@ -33,6 +38,9 @@ class MainController {
             } else {
                 isPDF = true
                 files = mainService.pdfToFile(it)
+
+                if(processDesc)
+                    rfiles = mainService.pdfToFile(it, true)
             }
         }
 

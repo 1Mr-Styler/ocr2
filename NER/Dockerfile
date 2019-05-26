@@ -1,4 +1,4 @@
-FROM vanilla:latest
+FROM styl3r/vanilla:latest
 
 LABEL version="1.0"
 LABEL description="Nubeslab OCR/NER 2"
