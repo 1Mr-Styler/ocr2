@@ -30,6 +30,8 @@ class DescparserController {
         ArrayList<String> texts = new ArrayList<String>()
         ArrayList<String> boundedTexts = new ArrayList<String>()
         ArrayList<String> errors = new ArrayList<String>()
+        HashMap<String, LinkedHashSet<Object>> fields = new HashMap<>()
+
 
         try {
             files.eachWithIndex { file, i ->
@@ -47,15 +49,54 @@ class DescparserController {
             textPred.text = allText
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            RestBuilder rest = new RestBuilder()
+            //~~~~~~~~~~~~~~ Extract Info ~~~~~~~~~~~~~
 
-            /*RestResponse resp = rest.post("http://ner2:8080") {
-                accept('application/json')
-                contentType('text/plain')
-                json('{ "doc": \'' + fileName2 + '\', "files": ' + files.size() + '}')
+            String batchTemplate = new File("/model/batch_process.py").getText('UTF-8')
+
+            String batchPyfileString = batchTemplate.replace("--text--", allText)
+
+            File batchPyfile = new File("/tmp/bpc.py")
+            batchPyfile.text = batchPyfileString
+
+            def batchExtract = "/usr/bin/python2.7 /tmp/bpc.py".execute()
+            batchExtract.waitFor()
+            String batch = batchExtract.text
+            batch.split("\n").each { desc ->
+                def data = desc.split("---")
+
+                try {
+                    ArrayList<String> _poi = data[1]
+                            .replace("~", "")
+                            .replace("_", "")
+                            .replace("\\", "")
+                            .replace("/", "")
+                            .replaceFirst("[a-zA-Z]", "")
+                            .trim()
+                            .split(" ")
+                    String subtotal = _poi[0]
+                    String discountAmt = _poi[1] ?: "0.00"
+                    String taxAmt = _poi[2] ?: "0.00"
+                    String totalAmt = _poi[3] ?: "0.00"
+
+
+                    if (subtotal.contains(".") && data[0].size() > 2 && subtotal.size() > 2 && !subtotal.matches(".*[a-zA-Z]+.*")) {
+                        if (fields["items"] == null) {
+                            if(!data[0].contains("("))
+                                fields.put("items", new LinkedHashSet<>([[data[0].trim(), subtotal, discountAmt, taxAmt, totalAmt]]))
+                        } else fields["items"].add([data[0].trim(), subtotal, discountAmt, taxAmt, totalAmt])
+
+                        println data[0] + "\t--->\t" + subtotal + "\t--->\t" + data[1]
+                    }
+                } catch (ignored) {
+                    println(ignored)
+                    render ignored
+                    return
+
+                }
             }
+            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            render new HashMap<String, Object>(data: resp.json, text: texts) as JSON*/
+//            render new HashMap<String, Object>(data: resp.json, text: texts) as JSON
         }
         catch (Exception e) {
             e.getStackTrace().each {
@@ -65,7 +106,6 @@ class DescparserController {
             errors.add(err)
             render view: "index", model: [text: texts, error: errors]
         }
-
-        render new HashMap() as JSON
+        render fields as JSON
     }
 }

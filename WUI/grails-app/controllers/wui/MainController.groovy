@@ -113,6 +113,7 @@ class MainController {
             total += it[4].toString().replace(",", "").toDouble()
         }
         flash.items = data
+        flash.description = desc.items
         flash.sub = sub.round(2)
         flash.discount = discs.round(2)
         flash.tax = tax.round(2)
