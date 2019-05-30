@@ -42,21 +42,21 @@ class DocumentController {
         String fileName2 = "${path}_${fileNameTemplate}.txt"
         String fileName3 = "${path}_${fileNameTemplate}.txt.bounds"
 
-        documentService.b64ToFile(document, fileName)
+        documentService.renameFile(document, fileName)
 
         files.add(fileName)
 
         if (request.JSON.getAt('doc2') != null) {
             document2 = new File("/model/images/" + request.JSON.getAt('doc2'))
             fileName = "${path}_doc2_${System.currentTimeMillis().toString()}.jpg"
-            documentService.b64ToFile(document2, fileName)
+            documentService.renameFile(document2, fileName)
             files.add(fileName)
         }
 
         if (request.JSON.getAt('doc3') != null) {
             document3 = new File("/model/images/" + request.JSON.getAt('doc3'))
             fileName = "${path}_doc3_${System.currentTimeMillis().toString()}.jpg"
-            documentService.b64ToFile(document3, fileName)
+            documentService.renameFile(document3, fileName)
             files.add(fileName)
         }
 

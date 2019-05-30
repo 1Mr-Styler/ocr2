@@ -3,7 +3,7 @@ package insur
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class DocumentControllerSpec extends Specification implements ControllerUnitTest<DocumentController> {
+class DescparserControllerSpec extends Specification implements ControllerUnitTest<DescparserController> {
 
     def setup() {
     }

@@ -165,10 +165,10 @@
                         <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Organizations</h5>
+                                    <h5 class="mb-1">Descriptions</h5>
                                     <small>Detected</small>
                                 </div>
-                                <g:each in="${flash.items?.data?.organization}" var="org">
+                                <g:each in="${flash.items?.description}" var="org">
                                     <p class="mb-1">${org}</p>
                                 </g:each>
                             </a>

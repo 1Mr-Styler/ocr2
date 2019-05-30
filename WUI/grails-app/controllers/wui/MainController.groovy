@@ -78,6 +78,26 @@ class MainController {
 
         println(resp.json.data)
 
+        req = '{ "token": "AS87YVN5RFBBVjNCLX0X3pBOEhXU1ZmSi1VY0llMjdpeUdJ", '
+        rfiles.size().times {
+            int num = it + 1
+            req += "\"doc${num}\":"
+            req += "\"${rfiles[it].chequeFilename}\", "
+
+        }
+        req += '}'
+        println(req)
+
+        resp = rest.post("http://ocr2:8090/descparser") {
+            accept('application/json')
+            contentType('text/plain')
+            json(req)
+        }
+
+        JSONObject desc = JSON.parse(resp.text)
+
+        println(desc)
+
         double sub = 0d
         double total = 0d
         double discs = 0d
