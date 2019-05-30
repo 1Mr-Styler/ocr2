@@ -9,6 +9,7 @@
     .ques {
         color: darkslateblue;
     }
+
     .switch {
         position: relative;
         display: inline-block;
@@ -16,7 +17,9 @@
         height: 50px;
     }
 
-    .switch input {display:none;}
+    .switch input {
+        display: none;
+    }
 
     .slider {
         position: absolute;
@@ -45,6 +48,7 @@
         -webkit-transition: .4s;
         transition: all 0.4s ease-in-out;
     }
+
     .slider:after {
         position: absolute;
         left: 0;
@@ -91,6 +95,7 @@
     .slider.round:before {
         border-radius: 50%;
     }
+
     .absolute-no {
         position: absolute;
         left: 0;
@@ -168,9 +173,26 @@
                                     <h5 class="mb-1">Descriptions</h5>
                                     <small>Detected</small>
                                 </div>
-                                <g:each in="${flash.items?.description}" var="org">
-                                    <p class="mb-1">${org}</p>
-                                </g:each>
+
+                                <table class="table table-dark">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <p class="mb-1">${org}</p>
+                                        <g:each in="${flash?.description}" var="item" status="i">
+                                            <tr>
+                                                <td contenteditable>${item[0]}</td>
+                                                <td contenteditable>${item[1]}</td>
+                                                <td contenteditable>${item[2]}</td>
+                                            </tr>
+                                        </g:each>
+                                    </tbody>
+                                </table>
                             </a>
                         </div>
                         <table class="display" id="example" style="width:100%">
