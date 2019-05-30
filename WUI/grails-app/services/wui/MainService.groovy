@@ -27,13 +27,15 @@ class MainService {
         String newNameTemplate = stuff.getOriginalFilename().replace(".pdf", "-pdf").replace(" ", "")
 
         //xtract PDF
+        def sout = new StringBuilder(), serr = new StringBuilder()
         def proc = desc ? "python2.7 /model/rpdf2jpg.py ${pdfLocation} /model/images/${newNameTemplate}".execute() : "python2.7 /model/pdf2jpg.py ${pdfLocation} /model/images/${newNameTemplate}".execute()
+        proc.consumeProcessOutput(sout, serr)
         proc.waitFor()
-
+        println "out> $sout err> $serr"
 
         ArrayList<HashMap<String, String>> files = new ArrayList<>()
-        proc.text.split("\n").each {
-//            reduce(it)
+        sout.toString().split("\n").each {
+            reduce(it)
             files.add([chequeFilename: it.replace("/model/images/", "")])
         }
 

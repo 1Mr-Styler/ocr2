@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''(?:Bill)?\s?Date[\s/]Time\s?:?\s?(?P<date>[0-9-/\s:APM]+)''')
+regex = (r'''(?:Bill)?\s?Date[\s/and]+Time\s?:?\s?(?P<date>[0-9-/\s:APM]+)''')
 
 test_str = ('''--text--''')
 
