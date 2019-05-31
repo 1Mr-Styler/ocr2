@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''GL\s(?:No\.?|number)\s?:?\s?(?P<gl>[A-Z0-9/]+)''')
+regex = (r'''(?:GL|Ref|Reference)\s(?:No\.?|number)\s?:?-?\s?(?P<gl>[A-Z0-9/]+)''')
 
 test_str = ('''--text--''')
 

@@ -218,7 +218,7 @@
                                 </tr>
                             </g:each>
                             <tr>
-                                <th scope="row"></th>
+                                <th scope="row" style="color: rgba(0, 0, 0, 0.0)">10000</th>
                                 <td style="text-align: right">Subtotal</td>
                                 <td contenteditable>${flash.sub}</td>
                                 <td>${flash.discount}</td>
