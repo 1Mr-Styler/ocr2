@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''.*(?:Patient)\s([Nn]ame[\s\t:;]+?([A-Z]{2,}\s[A-Z]{2,}\s?[A-Z]{2,}?))[\s\r\n\t]''')
+regex = (r'''.*(?:Patient)\s((?:[Nn]ame)?[\s\t:;]+?([A-Z]{2,}\s[A-Z]{2,}\s?[A-Z]{2,}?))[\s\r\n\t]''')
 
 test_str = ('''--text--''')
 
