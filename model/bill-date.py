@@ -7,7 +7,7 @@ regex = (r'''(?:Bill)?\s?Date[\s/and]+(?:Time)?\s?:?\s?(?P<date>\d{2}[-/](?:[a-z
 
 test_str = ('''--text--''')
 
-matches = re.finditer(regex, test_str, re.MULTILINE)
+matches = re.finditer(regex, test_str, re.MULTILINE  | re.IGNORECASE)
 data = ""
 for matchNum, match in enumerate(matches):
     matchNum = matchNum + 1

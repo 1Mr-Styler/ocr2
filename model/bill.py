@@ -7,7 +7,7 @@ regex = (r'''(?:Bill|Invoice)\s(?:No\.?|number),?\s?:?\s?(?P<bill>[A-Z0-9-]+)'''
 
 test_str = ('''--text--''')
 
-matches = re.finditer(regex, test_str, re.MULTILINE)
+matches = re.finditer(regex, test_str, re.MULTILINE | re.IGNORECASE)
 data = ""
 for matchNum, match in enumerate(matches):
     matchNum = matchNum + 1
