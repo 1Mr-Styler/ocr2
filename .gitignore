@@ -6,3 +6,5 @@ build/
 model/ner.py
 !requirements.txt
 *.pdf
+*.png
+*.jpg
