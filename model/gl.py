@@ -3,11 +3,11 @@
 
 import re
 
-regex = (r'''(?:GL|Ref|Reference)\s(?:No\.?|number)\s?:?-?\s?(?P<gl>[A-Z0-9/]+)''')
+regex = (r'''(?:GL|Ref|Reference)\s?(?:No\.?|number)\s?:?-?\s?(?P<gl>[A-Z0-9/]+)''')
 
 test_str = ('''--text--''')
 
-matches = re.finditer(regex, test_str, re.MULTILINE)
+matches = re.finditer(regex, test_str, re.MULTILINE | re.IGNORECASE)
 data = ""
 for matchNum, match in enumerate(matches):
     matchNum = matchNum + 1

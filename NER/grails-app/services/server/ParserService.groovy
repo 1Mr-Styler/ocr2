@@ -56,7 +56,7 @@ class ParserService {
         //~~~~~~~~~~~~~~ Extract Bill Number ~~~~~~~~~~~~~
         String billTemplate = new File("${path}/bill.py").getText('UTF-8')
 
-        String bt = billTemplate.replace("--text--", nerResult)
+        String bt = billTemplate.replace("--text--", tabTexts[0])
         File billpy = new File("/tmp/bill.py")
         billpy.text = bt
 
@@ -68,7 +68,7 @@ class ParserService {
         //~~~~~~~~~~~~~~ Extract Bill Date ~~~~~~~~~~~~~
         billTemplate = new File("${path}/bill-date.py").getText('UTF-8')
 
-        bt = billTemplate.replace("--text--", nerResult)
+        bt = billTemplate.replace("--text--", tabTexts[0])
         billpy = new File("/tmp/bill-date.py")
         billpy.text = bt
 
@@ -255,7 +255,7 @@ class ParserService {
                     def totals = discount.split(" ")
                     fields.put("total-gross", new LinkedHashSet<>([totals[0]]))
                     fields.put("total-discount", new LinkedHashSet<>([totals[1]]))
-                    fields.put("total-net", new LinkedHashSet<>([totals[1]]))
+                    fields.put("total-net", new LinkedHashSet<>([totals[2]]))
 
                 } else {
                     fields.put("total-gross", new LinkedHashSet<>([amounts[0]]))
