@@ -7,7 +7,7 @@
 
 <body>
 <!-- Main Content -->
-<div class="hk-pg-wrapper">
+<div class="hk-pg-wrapper" style="background-color: #D2D8E6">
     <!-- Container -->
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
@@ -179,7 +179,7 @@
                                     <div class="table-wrap">
                                         <div class="table-responsive">
                                             <table class="table table-hover mb-0">
-%{--                                                <thead style="color: #223F7D">--}%
+                                                %{--                                                <thead style="color: #223F7D">--}%
                                                 <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -194,11 +194,11 @@
                                                 <g:each in="${flash.items?.data?.items}" var="item" status="i">
                                                     <tr>
                                                         <td>${i + 1}</td>
-                                                        <td>${item[0]}</td>
-                                                        <td>${item[1]}</td>
-                                                        <td>${item[2]}</td>
-                                                        <td>${item[3]}</td>
-                                                        <td>${item[4]}</td>
+                                                        <td contenteditable>${item[0]}</td>
+                                                        <td contenteditable>${item[1]}</td>
+                                                        <td contenteditable>${item[2]}</td>
+                                                        <td contenteditable>${item[3]}</td>
+                                                        <td contenteditable>${item[4]}</td>
                                                     </tr>
                                                 </g:each>
                                                 <tr>
@@ -246,27 +246,6 @@
     </div>
     <!-- /Container -->
 
-    <!-- Footer -->
-    <div class="hk-footer-wrap container">
-        <footer class="footer">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <p>Pampered by<a href="#" class="text-dark" target="_blank">Allianz X tract</a> © 2019</p>
-                </div>
-
-                %{--<div class="col-md-6 col-sm-12">
-                    <p class="d-inline-block">Follow us</p>
-                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                            class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
-                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                            class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
-                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                            class="btn-icon-wrap"><i class="fa fa-google-plus"></i></span></a>
-                </div>--}%
-            </div>
-        </footer>
-    </div>
-    <!-- /Footer -->
 </div>
 <!-- /Main Content -->
 </body>

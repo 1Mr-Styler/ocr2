@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <meta name="layout" content="main"/>
+    <meta name="layout" content="xtract"/>
     <title></title>
 
     <style type="text/css">
@@ -111,142 +111,61 @@
 </head>
 
 <body>
-<div class="text-center py-5">
-    <div class="container">
-        <div class="row my-5 justify-content-center">
-            <div class="col-md-9">
-                <h1>Data Extractor</h1>
-            <!--<p class="lead text-muted">...</p>-->
 
-                <g:uploadForm controller="main" action="upload">
-
-                    <p>Select Images or PDF File</p>
-                    <input type="file" class="btn btn-secondary m-2" name="img" multiple="multiple"/>
-                    <br/>
-                    <h4 class="ques">Process Descriptions?</h4>
-                    <label class="switch">
-                        <input type="checkbox" name="pd">
-                        <span class="slider round"></span>
-                        <span class="absolute-no">NO</span>
-                    </label>
-
-                    <p></p>
-                    <g:submitButton name="upload" value="Upload"/>
-                </g:uploadForm>
+<!-- Main Content -->
+<div class="hk-pg-wrapper"  style="background-color: #D2D8E6">
+    <!-- Container -->
+    <div class="container mt-xl-50 mt-sm-30 mt-15">
+        <!-- Title -->
+        <div class="hk-pg-header align-items-top">
+            <div>
+                <h2 class="hk-pg-title font-weight-600 mb-10">Dashboard</h2>
             </div>
         </div>
-    </div>
-</div>
-<g:if test="${flash.hasUpload != null}">
-    <div class="py-4 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
-                        <ul class="list-group">
-                            <li class="list-group-item"
-                                contenteditable>Patient Name: ${flash.items?.data?."patient-names"?.getAt(0).toString().split("\n")[-1]}</li>
-                            <li class="list-group-item"
-                                contenteditable>Patient NRIC: ${flash.items?.data?.nric?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Bill No: ${flash.items?.data?.bill?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Bill Date/Time: ${flash.items?.data?."bill-date"?.getAt(0)}</li>
-                            <li class="list-group-item" contenteditable>GL No: ${flash.items?.data?.gl?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Charge Type: ${flash.items?.data?.charge?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Admission Date: ${flash.items?.data?."admission-date"?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Discharge Date: ${flash.items?.data?."discharge-date"?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Total Gross: MYR${flash.items?.data?."total-gross"?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Total Discount: MYR${flash.items?.data?."total-discount"?.getAt(0)}</li>
-                            <li class="list-group-item"
-                                contenteditable>Total Payable: MYR${flash.items?.data?."total-net"?.getAt(0)}</li>
-                        </ul>
+        <!-- /Title -->
 
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Descriptions</h5>
-                                    <small>Detected</small>
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hk-row">
+                    <div class="card">
+
+                        <div class="card card-refresh">
+                            <div class="card-body">
+                                <div class="col-lg-7" style="background-color: white">
+                                    <g:uploadForm controller="main" action="upload">
+
+                                        <p>Select Images or PDF File</p>
+                                        <input type="file" class="btn btn-secondary m-2" name="img"
+                                               multiple="multiple"/>
+                                        <br/>
+                                        <h4 class="ques">Process Descriptions?</h4>
+                                        <label class="switch">
+                                            <input type="checkbox" name="pd">
+                                            <span class="slider round"></span>
+                                            <span class="absolute-no">NO</span>
+                                        </label>
+
+                                        <p></p>
+
+                                        <div class="d-flex align-items-center card-action-wrap col-md-8">
+                                            <g:submitButton name="upload" value="Upload"
+                                                            class="btn btn-primary btn-block"/>
+                                        </div>
+                                    </g:uploadForm>
                                 </div>
-
-                                <table class="table table-dark">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Qty</th>
-                                        <th scope="col">Amount</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <p class="mb-1">${org}</p>
-                                        <g:each in="${flash?.description}" var="item" status="i">
-                                            <tr>
-                                                <td contenteditable>${item[0]}</td>
-                                                <td contenteditable>${item[1]}</td>
-                                                <td contenteditable>${item[2]}</td>
-                                            </tr>
-                                        </g:each>
-                                    </tbody>
-                                </table>
-                            </a>
+                            </div>
                         </div>
-                        <table class="display" id="example" style="width:100%">
-                            <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Disc.</th>
-                                <th scope="col">Tax</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <g:each in="${flash.items.data.items}" var="item" status="i">
-                                <tr>
-                                    <th scope="row">${i + 1}</th>
-                                    <td contenteditable>${item[0]}</td>
-                                    <td contenteditable>${item[1]}</td>
-                                    <td contenteditable>${item[2]}</td>
-                                    <td contenteditable>${item[3]}</td>
-                                    <td contenteditable>${item[4]}</td>
-                                </tr>
-                            </g:each>
-                            <tr>
-                                <th scope="row" style="color: rgba(0, 0, 0, 0.0)">10000</th>
-                                <td style="text-align: right">Subtotal</td>
-                                <td contenteditable>${flash.sub}</td>
-                                <td>${flash.discount}</td>
-                                <td>${flash.tax}</td>
-                                <td>${flash.total}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
                     </div>
                 </div>
-
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
-                        <g:each in="${flash.image}" var="image">
-                            <img class="card-img-top" src="${assetPath(src: "${image}")}">
-                        </g:each>
-                    </div>
-                </div>
-
-                <div class="col-md-6 p-3">
-                    <div class="card box-shadow">
-                    </div>
-                </div>
-
             </div>
         </div>
+        <!-- /Row -->
     </div>
-</g:if>
+    <!-- /Container -->
+
+</div>
+<!-- /Main Content -->
+
 </body>
 </html>
