@@ -1,7 +1,5 @@
 *.txt*
 .DS_Store
-*.jpg
-*.png
 build/
 .gradle/
 .idea/
