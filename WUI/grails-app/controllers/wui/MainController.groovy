@@ -5,6 +5,7 @@ import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import org.grails.web.json.JSONObject
 
+
 class MainController {
 
     MainService mainService
@@ -118,6 +119,13 @@ class MainController {
         flash.discount = discs.round(2)
         flash.tax = tax.round(2)
         flash.total = total.round(2)
+
+        String name = data.data?."patient-names"?.getAt(0)?.toString()
+
+        if(name != null && !name.empty){
+            name = name.split("\n")[-1]
+        } else name = "N/A"
+        flash.name = name
 
 
         render view: "/nui"

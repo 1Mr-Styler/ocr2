@@ -43,7 +43,7 @@
 
                                             <div class="col-md-9 form-group">
                                                 <input class="form-control" placeholder="NG MOW KWANG"
-                                                       value="${flash.items?.data?."patient-names"?.getAt(0)?.toString()?.split("\n")[-1]}"
+                                                       value="${flash.name}"
                                                        name="patientname" type="text">
                                             </div>
                                         </div>
