@@ -120,6 +120,6 @@ class MainController {
         flash.total = total.round(2)
 
 
-        chain action: "index"
+        render view: "/nui"
     }
 }
