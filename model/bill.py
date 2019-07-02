@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''(?:Bill|Invoice)\s(?:No\.?|number),?\s?:?\s?(?P<bill>[A-Z0-9-]+)''')
+regex = (r'''(?:Bill|Invoice)\s(?:No\.?|number),?\s?:?>?\s?(?P<bill>[A-Z0-9-]+)''')
 
 test_str = ('''--text--''')
 

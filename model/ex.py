@@ -7,7 +7,7 @@ regex = (r'''.*(?:Patient)\s((?:[Nn]ame)?[\s\t:;]+?([A-Z]{2,}\s[A-Z]{2,}\s?[A-Z]
 
 test_str = ('''--text--''')
 
-matches = re.finditer(regex, test_str, re.MULTILINE)
+matches = re.finditer(regex, test_str, re.MULTILINE | re.IGNORECASE)
 data = ""
 for matchNum, match in enumerate(matches):
     matchNum = matchNum + 1
