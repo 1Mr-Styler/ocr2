@@ -3,7 +3,7 @@
 
 import re
 
-regex = (r'''Charge\s(?:Type|type)\s?:?\s?_?\s?(?P<charge>[a-zA-Z]+)''')
+regex = (r'''(?:Charge|Visit)\s(?:Type|type)\s?:?\s?_?\s?(?P<charge>[a-zA-Z]+)''')
 
 test_str = ('''--text--''')
 
