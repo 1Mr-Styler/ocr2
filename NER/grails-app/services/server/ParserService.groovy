@@ -250,6 +250,16 @@ class ParserService {
 
             amounts[0] = _amounts.reverse()[0]
             amounts[1] = _amounts.reverse()[1]
+
+            fields.put("total-gross", new LinkedHashSet<>([amounts[0] ?: 0]))
+            fields.put("total-net", new LinkedHashSet<>([amounts[1] ?: 0]))
+            try {
+                fields.put("total-discount", new LinkedHashSet<>([(amounts[0] - amounts[1]).round(2)]))
+            } catch (ignored) {
+                fields.put("total-discount", new LinkedHashSet<>([0]))
+            }
+
+
             if (!discount.empty) {
                 if (discount.contains(" ")) {
                     def totals = discount.split(" ")
@@ -262,10 +272,6 @@ class ParserService {
                     fields.put("total-net", new LinkedHashSet<>([amounts[1]]))
                     fields.put("total-discount", new LinkedHashSet<>([discount]))
                 }
-            } else {
-                fields.put("total-gross", new LinkedHashSet<>([amounts[0]]))
-                fields.put("total-net", new LinkedHashSet<>([amounts[1]]))
-                fields.put("total-discount", new LinkedHashSet<>([(amounts[0] - amounts[1]).round(2)]))
             }
 
             fields.remove("amount")

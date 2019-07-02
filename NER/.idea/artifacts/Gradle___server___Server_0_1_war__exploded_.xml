@@ -80,7 +80,6 @@
           <element id="library" level="project" name="Gradle: org.grails:grails-datastore-gorm-support:6.1.9.RELEASE" />
           <element id="library" level="project" name="Gradle: org.grails:grails-datastore-gorm-hibernate5:6.1.9.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.3.16.RELEASE" />
-          <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.3.2.Final" />
           <element id="library" level="project" name="Gradle: antlr:antlr:2.7.7" />
           <element id="library" level="project" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
           <element id="library" level="project" name="Gradle: org.jboss:jandex:2.0.3.Final" />
@@ -133,6 +132,7 @@
           <element id="library" level="project" name="Gradle: org.grails:grails-taglib:3.3.1" />
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Gradle: commons-collections:commons-collections:3.2.2" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar" />
         </element>
       </element>
     </root>

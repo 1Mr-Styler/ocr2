@@ -22,7 +22,7 @@ class MainController {
 
         boolean isPDF = false
         boolean processDesc = false
-        if(params.pd != null && params.pd == "on") {
+        if (params.pd != null && params.pd == "on") {
             processDesc = true;
         }
 
@@ -40,7 +40,7 @@ class MainController {
                 isPDF = true
                 files = mainService.pdfToFile(it)
 
-                if(processDesc)
+                if (processDesc)
                     rfiles = mainService.pdfToFile(it, true)
             }
         }
@@ -105,7 +105,11 @@ class MainController {
         double tax = 0d
         data.data.items.each {
             sub += it[1].toString().replace(",", "").toDouble()
-            discs += it[2].toString().replace(",", "").toDouble()
+            try {
+                discs += it[2].toString().replace(",", "").toDouble()
+            } catch (ignored) {
+                discs += 0
+            }
             tax += it[3].toString().replace(",", "").toDouble()
             double mTotal = it[4].toString().replace(",", "").toDouble()
             if (mTotal == 0) {
@@ -122,7 +126,7 @@ class MainController {
 
         String name = data.data?."patient-names"?.getAt(0)?.toString()
 
-        if(name != null && !name.empty){
+        if (name != null && !name.empty) {
             name = name.split("\n")[-1]
         } else name = "N/A"
         flash.name = name
